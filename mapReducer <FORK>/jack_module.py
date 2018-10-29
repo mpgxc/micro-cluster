@@ -30,13 +30,14 @@ def make_jack(num_worker, file):
             clusters.append(result)
 
             result = []
-            
+
             workers += int(qtd/num_worker)
 
     return clusters
 
-
+'''
 #como usar
 for line in make_jack(3 , mapper("portuguese","data.txt")):
     print(line)
     print("----------------------")
+'''
