@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "/usr/bin/python",
+    "files.associations": {
+        "thread": "cpp",
+        "cmath": "cpp",
+        "cassert": "cpp",
+        "chrono": "cpp",
+        "iostream": "cpp"
+    }
+}
