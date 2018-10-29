@@ -15,4 +15,5 @@ def mapper(lang, file):
         
         for word in words:
             out.append({"text": word, "count": 1})
+            
     return out
