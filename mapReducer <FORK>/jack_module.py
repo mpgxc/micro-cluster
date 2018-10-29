@@ -24,15 +24,19 @@ def make_jack(num_worker, file):
         count += 1
 
         if count == workers:
+
+            result = sorted(result, key = lambda i: i['text']) #linha pra ordenar JSON baseao no campo de texto
+    
             clusters.append(result)
+
             result = []
+            
             workers += int(qtd/num_worker)
 
     return clusters
 
 
-'''
 #como usar
-make_jack(3 , mapper("portuguese","data.txt")):
-
-'''
+for line in make_jack(3 , mapper("portuguese","data.txt")):
+    print(line)
+    print("----------------------")
