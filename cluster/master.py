@@ -4,7 +4,11 @@ import threading
 import json
 import time
 import base64
-import compacta as makeCompactada
+import zlib
+
+
+def compacta(text):
+    return zlib.compress(text)
 
 
 def tprint(msg):
@@ -19,6 +23,7 @@ class ServerTask(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+
         context = myThread.Context()
         frontend = context.socket(myThread.ROUTER)
         frontend.bind('tcp://*:5570')
@@ -56,29 +61,24 @@ class ServerWorker(threading.Thread):
             ident, msg = worker.recv_multipart()
             result = json.loads(msg)
 
-            tprint('Requisição [%s] Node [%s]' %
-                   (result['code'], ident.decode()))
+            tprint('Requisição [%s] Node [%s]' % (result['code'], ident.decode()))
 
             print(msg)
 
             # -------------AQUI VAI FICAR A ENTRADA DOS DADOS---------------
 
-            data1 = {
+            data = {
                 "code": 500,
                 "resp": "Opaa...",
-            }
-            data2 = {
-                "code": 600,
-                "resp": "Iai...",
             }
 
             # --------------------------------------------------------------
 
             # aqui se cifra a mensagem em base64
-            cifrado1 = base64.b64encode(str(data1).encode('utf-8'))
-            cifrado2 = base64.b64encode(str(data2).encode('utf-8'))
+            cifrado = base64.b64encode(str(data).encode('utf-8'))
+            compactado = compacta(cifrado)
 
-            compactado = makeCompactada.compacta(cifrado1)
+            print(">> ", compactado)
 
             '''
             print("TEXTO CIFRADO 1:", cifrado1)
@@ -87,9 +87,7 @@ class ServerWorker(threading.Thread):
 
             idWorker = ident.decode()
 
-            
             worker.send_multipart([ident, compactado])
-      
 
         worker.close()
 

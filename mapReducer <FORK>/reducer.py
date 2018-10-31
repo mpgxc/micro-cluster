@@ -1,16 +1,20 @@
 from operator import itemgetter
 import sys
 
-def reducer():
+def reducer(file):
 
     current_word = None
     current_count = 0
     word = None
 
     out = open('final.txt', 'a')
-    for line in open(sys.argv[1]):
+    
+    for line in file:
+        
         line = line.strip()
-        word, count = line.split('\t', 1)
+
+        word  = line['text']
+        count = line['count']
         
         try:
             count = int(count)

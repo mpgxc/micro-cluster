@@ -4,8 +4,11 @@ import threading
 import json
 import time
 import base64
-import compacta as makeCompactada
+import zlib
 
+
+def descompacta(text):
+    return zlib.decompress(text)
 
 def tprint(msg):
 
@@ -46,7 +49,9 @@ class ClientTask(threading.Thread):
 
             msg = socket.recv()  # converte de String para JSON
 
-            descompactado = makeCompactada.descompacta(msg) #descompactando texto
+            print(">> ", msg)
+
+            descompactado = descompacta(msg) #descompactando texto
             
             decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
@@ -62,7 +67,7 @@ class ClientTask(threading.Thread):
 
 def main():
 
-    client = ClientTask(100)
+    client = ClientTask(200)
     client.start()
 
 

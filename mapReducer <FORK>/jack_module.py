@@ -6,12 +6,13 @@ from mapper import mapper
 '''
 
 def make_jack(num_worker, file):
+    
     '''
         A divisão do arquivo depende da quantidade de máquinas liagadas ao cluster
         num_worker corresponde a esse número de máquinas.
     '''
     qtd = len(file)
-    workers = int(qtd/num_worker)
+    workers = int(qtd / num_worker)
     count = 0
 
     result = []
@@ -20,18 +21,14 @@ def make_jack(num_worker, file):
     for line in file:
 
         result.append(line)
-
         count += 1
 
         if count == workers:
 
             result = sorted(result, key = lambda i: i['text']) #linha pra ordenar JSON baseao no campo de texto
-    
             clusters.append(result)
-
+            workers += int(qtd / num_worker)
             result = []
-
-            workers += int(qtd/num_worker)
 
     return clusters
 
