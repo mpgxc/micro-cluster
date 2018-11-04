@@ -78,7 +78,7 @@ class ServerWorker(threading.Thread):
             cifrado = base64.b64encode(str(data).encode('utf-8'))
             compactado = compacta(cifrado)
 
-            print(">> ", compactado)
+            #print(">> ", compactado)
 
             '''
             print("TEXTO CIFRADO 1:", cifrado1)
@@ -86,9 +86,7 @@ class ServerWorker(threading.Thread):
             '''
 
             idWorker = ident.decode()
-
             worker.send_multipart([ident, compactado])
-
         worker.close()
 
 

@@ -1,4 +1,4 @@
-import zmq
+import zmq as myThread
 import sys
 import threading
 import json
@@ -9,6 +9,7 @@ import zlib
 
 def descompacta(text):
     return zlib.decompress(text)
+
 
 def tprint(msg):
 
@@ -24,16 +25,16 @@ class ClientTask(threading.Thread):
 
     def run(self):
 
-        context = zmq.Context()
-        socket = context.socket(zmq.DEALER)
+        context = myThread.Context()
+        socket = context.socket(myThread.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
         socket.connect('tcp://localhost:5570')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
-        poll = zmq.Poller()
-        poll.register(socket, zmq.POLLIN)
+        poll = myThread.Poller()
+        poll.register(socket, myThread.POLLIN)
         reqs = 0
 
         while True:
@@ -51,8 +52,8 @@ class ClientTask(threading.Thread):
 
             print(">> ", msg)
 
-            descompactado = descompacta(msg) #descompactando texto
-            
+            descompactado = descompacta(msg)  # descompactando texto
+
             decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
             msg = eval(decifrado.decode('utf-8'))
