@@ -1,4 +1,4 @@
-import zmq as myThread
+import zmq as mySocket
 import sys
 import threading
 import json
@@ -25,16 +25,16 @@ class ClientTask(threading.Thread):
 
     def run(self):
 
-        context = myThread.Context()
-        socket = context.socket(myThread.DEALER)
+        context = mySocket.Context()
+        socket = context.socket(mySocket.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
         socket.connect('tcp://localhost:5570')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
-        poll = myThread.Poller()
-        poll.register(socket, myThread.POLLIN)
+        poll = mySocket.Poller()
+        poll.register(socket, mySocket.POLLIN)
         reqs = 0
 
         while True:

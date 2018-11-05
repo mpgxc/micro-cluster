@@ -1,4 +1,4 @@
-import zmq as myThread
+import zmq as mySocket
 import sys
 import threading
 import json
@@ -24,11 +24,11 @@ class ServerTask(threading.Thread):
 
     def run(self):
 
-        context = myThread.Context()
-        frontend = context.socket(myThread.ROUTER)
+        context = mySocket.Context()
+        frontend = context.socket(mySocket.ROUTER)
         frontend.bind('tcp://*:5570')
 
-        backend = context.socket(myThread.DEALER)
+        backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
 
         #workers = []
@@ -37,7 +37,7 @@ class ServerTask(threading.Thread):
         worker.start()
         # workers.append(worker)
 
-        myThread.proxy(frontend, backend)
+        mySocket.proxy(frontend, backend)
 
         frontend.close()
         backend.close()
@@ -52,12 +52,28 @@ class ServerWorker(threading.Thread):
 
     def run(self):
 
-        worker = self.context.socket(myThread.DEALER)
+        worker = self.context.socket(mySocket.DEALER)
         worker.connect('inproc://backend')
         tprint('Servidor TRABALAHNDO')
+        quant_slave = 3
+        count = 0
+        
+        lastid = None
+
+        while count < quant_slave:
+            
+            ident, msg = worker.recv_multipart()
+            lastid = ident
+
+            print("Worker %s" %(ident))
+            print(count)
+            if lastid != ident.decode():
+                count += 1
+                
+        print("Terminou!")
 
         while True:
-
+ 
             ident, msg = worker.recv_multipart()
             result = json.loads(msg)
 
