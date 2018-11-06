@@ -68,7 +68,7 @@ class ClientTask(threading.Thread):
 
 def main():
 
-    client = ClientTask(400)
+    client = ClientTask(100)
     client.start()
 
 
