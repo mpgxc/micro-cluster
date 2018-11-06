@@ -1,9 +1,10 @@
 from preprocess import make_tokens
+import sys
 
 def mapper(lang='portuguese'):
 
-    out = open("saida.txt", "w")
-    for line in open('data.txt'):
+    out = open("saida3.txt", "w")
+    for line in open(sys.argv[1]):
 
         tweet = make_tokens(line, lang)
         tweet = tweet.strip()

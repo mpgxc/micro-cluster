@@ -7,7 +7,8 @@ def reducer():
     current_count = 0
     word = None
 
-    out = open('final.txt', 'a')
+    out = open('final_reducer','w')
+
     for line in open(sys.argv[1]):
         line = line.strip()
         word, count = line.split('\t', 1)

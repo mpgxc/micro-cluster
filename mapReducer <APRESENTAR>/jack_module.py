@@ -3,7 +3,7 @@
 def count_lines(file):
     return sum(1 for __ in open(file))
 
-def make_jack(num_worker, file = 'saida.txt'):
+def make_jack(num_worker, file = 'data.txt'):
     '''
         A divisão do arquivo depende da quantidade de máquinas liagadas ao cluster
         num_worker corresponde a esse número de máquinas.

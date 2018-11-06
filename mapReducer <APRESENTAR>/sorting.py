@@ -1,8 +1,9 @@
+import sys
 
 def sorting():
 
-    out = open('saida.txt', 'r+')
-    data = [line.strip() for line in open('saida.txt')]
+    out = open(sys.argv[1], 'r+')
+    data = [line.strip() for line in open(sys.argv[1])]
     data.sort()
     for line in data:
         out.write(str(line)+"\n")
