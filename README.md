@@ -14,7 +14,7 @@ Cada computador que faz parte do cluster recebe o nome de nó (ou node). Teorica
 
 Os nós do cluster devem ser interconectados, preferencialmente, por uma tecnologia de rede conhecida, para fins de manutenção e controle de custos, como a Ethernet. É extremamente importante que o padrão adotado permita a inclusão ou a retirada de nós com o cluster em funcionamento, do contrário, o trabalho de remoção e substituição de um computador que apresenta problemas, por exemplo, faria a aplicação como um todo parar.
 
-[Fonte] Mateus (https://www.infowester.com/cluster.php)
+[Fonte](https://www.infowester.com/cluster.php)
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
