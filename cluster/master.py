@@ -60,6 +60,7 @@ class ServerWorker(threading.Thread):
         
         lastid = None
 
+        '''
         while count < quant_slave:
             
             ident, msg = worker.recv_multipart()
@@ -71,6 +72,7 @@ class ServerWorker(threading.Thread):
                 count += 1
                 
         print("Terminou!")
+        '''
 
         while True:
  
