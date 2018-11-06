@@ -3,7 +3,7 @@ import sys
 
 def mapper(lang='portuguese'):
 
-    out = open("saida3.txt", "w")
+    out = open("saida1.txt", "w")
     for line in open(sys.argv[1]):
 
         tweet = make_tokens(line, lang)

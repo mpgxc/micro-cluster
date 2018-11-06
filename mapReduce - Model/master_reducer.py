@@ -7,7 +7,7 @@ def reducer():
     current_count = 0
     word = None
 
-    out = open('final_reducer','w')
+    out = open('master_reducer','w')
 
     for line in open(sys.argv[1]):
         line = line.strip()
@@ -24,13 +24,13 @@ def reducer():
         else:
             if current_word:
                 print('%s\t%s' % (current_word, current_count))
-                out.write('%s\t%s' % (current_word, current_count)+'\n')
+                out.write('%s,%s' % (current_word, current_count)+'\n')
             current_count = count
             current_word = word
 
     if current_word == word:
         print('%s\t%s' % (current_word, current_count))
-        out.write('%s\t%s' % (current_word, current_count)+'\n')
+        out.write('%s,%s' % (current_word, current_count)+'\n')
     out.close()
 
 
