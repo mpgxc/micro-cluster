@@ -2,7 +2,7 @@
 
 
 ## Cluster Computer - MapReduce
-Arquitetura e estruturação do sistema - Cluster de processamento de BigData, modelo mapReduce - WordCount example.
+Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
 
 ## Segurança
 		
