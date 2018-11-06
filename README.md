@@ -1,5 +1,4 @@
-# Sistemas Distribuídos
-	![academico](http://www.transparentpng.com/download/networking/picture-networking-9.png)
+# Sistemas Distribuídos![academico](http://www.transparentpng.com/download/networking/picture-networking-9.png)
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
