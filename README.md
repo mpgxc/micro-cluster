@@ -6,9 +6,6 @@ Segundo Tanenbaum, um sistema distribuído é um conjunto de computadores indepe
 - Jogos Online
 - Redes Sociais e plataformas idênticas
 
-![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
-
-
 
 
 # Cluster
@@ -45,6 +42,7 @@ Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes caracterí
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
+![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
 
 ## Segurança
 		
