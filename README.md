@@ -6,6 +6,11 @@ Segundo Tanenbaum, um sistema distribuído é um conjunto de computadores indepe
 - Jogos Online
 - Redes Sociais e plataformas idênticas
 
+[academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
+
+
+
+
 # Cluster
 ### O que é cluster?
 Cluster (ou clustering) é, em poucas palavras, o nome dado a um sistema que relaciona dois ou mais computadores para que estes trabalhem de maneira conjunta no intuito de processar uma tarefa. Estas máquinas dividem entre si as atividades de processamento e executam este trabalho de maneira simultânea.
