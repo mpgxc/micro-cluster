@@ -6,6 +6,8 @@ Segundo Tanenbaum, um sistema distribuído é um conjunto de computadores indepe
 - Jogos Online
 - Redes Sociais e plataformas idênticas
 
+
+
 # Cluster
 ### O que é cluster?
 Cluster (ou clustering) é, em poucas palavras, o nome dado a um sistema que relaciona dois ou mais computadores para que estes trabalhem de maneira conjunta no intuito de processar uma tarefa. Estas máquinas dividem entre si as atividades de processamento e executam este trabalho de maneira simultânea.
@@ -40,6 +42,7 @@ Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes caracterí
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
+![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
 
 ## Segurança
 		
