@@ -28,7 +28,7 @@ for line in open('master_reducer', 'r'):
     if count == limit:
         break
 
-#make_cloud(" ".join(objects))
+make_cloud(" ".join(objects))
 
 print("Depois >>")
 
