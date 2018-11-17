@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html>
 
 <head>
 	<meta charset="utf-8">
@@ -9,61 +9,170 @@
 	<link rel="icon" href="static/img/favicon.ico">
 
 	<title>Offcanvas template for Bootstrap</title>
-
-	<!-- Bootstrap core CSS -->
 	<link href="static/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
 	<link href="static/css/offcanvas.css" rel="stylesheet">
 </head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script type="text/javascript" language="javascript">
+
+	$(document).ready(function () { /// Wait till page is loaded
+		setInterval(timingLoad, 3000);
+		function timingLoad() {
+			$('#main').load("{{ url_for('update') }} #main", function () {
+				/// can add another function here
+			});
+		}
+	});
+
+</script>
+<style>
+	.spinner {
+		margin: 100px auto 0;
+		width: 70px;
+		text-align: center;
+	}
+
+	.spinner>div {
+		width: 18px;
+		height: 18px;
+		background-color: #333;
+
+		border-radius: 100%;
+		display: inline-block;
+		-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+		animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	}
+
+	.spinner .bounce1 {
+		-webkit-animation-delay: -0.32s;
+		animation-delay: -0.32s;
+	}
+
+	.spinner .bounce2 {
+		-webkit-animation-delay: -0.16s;
+		animation-delay: -0.16s;
+	}
+
+	@-webkit-keyframes sk-bouncedelay {
+
+		0%,
+		80%,
+		100% {
+			-webkit-transform: scale(0)
+		}
+
+		40% {
+			-webkit-transform: scale(1.0)
+		}
+	}
+
+	@keyframes sk-bouncedelay {
+
+		0%,
+		80%,
+		100% {
+			-webkit-transform: scale(0);
+			transform: scale(0);
+		}
+
+		40% {
+			-webkit-transform: scale(1.0);
+			transform: scale(1.0);
+		}
+	}
+
+	.test{
+		margin-top: 25px;
+		font-size: 21px;
+		text-align: center;
+		animation: fadein 2s;
+		-moz-animation: fadein 2s;
+		/* Firefox */
+		-webkit-animation: fadein 2s;
+		/* Safari and Chrome */
+		-o-animation: fadein 2s;
+		/* Opera */
+	}
+
+	@keyframes fadein {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	@-moz-keyframes fadein {
+
+		/* Firefox */
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	@-webkit-keyframes fadein {
+
+		/* Safari and Chrome */
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	@-o-keyframes fadein {
+
+		/* Opera */
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+</style>
 
 <body class="bg-light">
 
 	<main role="main" class="container">
 		<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
-			<img class="mr-3" src="static/img/maze.svg" alt="" width="100" height="100">
+			<img class="mr-3" src="static/img/logo.png" alt="" width="100" height="100">
 			<div class="lh-100">
 				<h4 class="mb-0 text-white lh-100">Cluster - Gerenciamento</h4>
-				<small>Cluster de processamento de dados textuais<h5> <code> MapReduce </code> </h5> </small>
+				<small>Cluster de processamento de dados textuais<h5> <code> <b> MapReduce </b> </code> </h5> </small>
 			</div>
 		</div>
 
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
-			<h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-
-
+			<h6 class="border-bottom border-gray pb-2 mb-0">Administração</h6>
 			<br>
 		</div>
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
-			<h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-
-			{% for line in range(3) %}
-			<div class="media text-muted pt-3">
-				<img width="50px" src="static/img/pc.jpeg" alt="" class="mr-2 rounded">
-				<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">@username</strong>
-					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-					condimentum nibh, ut fermentum massa justo sit amet risus.
-
-				</p>
+			<div id="main">
+				<div class="test  spinner">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
 			</div>
-			{% endfor %}
 
 			<small class="d-block text-right mt-3">
 				<a href="#">Github</a>
 			</small>
+
 		</div>
 	</main>
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	 crossorigin="anonymous"></script>
-	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-	<script src="static/js/vendor/popper.min.js"></script>
-	<script src="static/js/vendor/holder.min.js"></script>
-	<script src="static/offcanvas.js"></script>
 </body>
 
 </html>
