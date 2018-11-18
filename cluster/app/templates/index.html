@@ -12,12 +12,12 @@
 	<link href="static/css/bootstrap.min.css" rel="stylesheet">
 	<link href="static/css/offcanvas.css" rel="stylesheet">
 	<link href="static/css/main.css" rel="stylesheet">
-	
+
 </head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
-<script type="text/javascript" language="javascript">
-
+<script>
+	/*
 	$(document).ready(function () { /// Wait till page is loaded
 		setInterval(timingLoad, 10000);
 		function timingLoad() {
@@ -26,10 +26,30 @@
 			});
 		}
 	});
+	*/
+	function spiner() { /// Wait till page is loaded
+
+		$('#main').load("{{ url_for('spiner') }} #main", function () {
+		});
+	}
+	
+	function make() { /// Wait till page is loaded
+
+		$('#main').load("{{ url_for('update') }} #main", function () {
+		});
+	}
+
+	$(document).ready(function () {
+		$('#detailed').click(function () {
+			$('#main').load("{{ url_for('update') }} #main", function () {
+
+			});
+		});
+	});
 
 </script>
 
-<body class="bg-light">
+<body onload="make()" class="bg-light">
 
 	<main role="main" class="container">
 		<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
@@ -43,18 +63,24 @@
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
 			<h6 class="border-bottom border-gray pb-2 mb-0">Administração</h6>
 			<br>
+			<button type="button" class="btn btn-primary btn-sm">Iniciar</button>
+			<button type="button" class="btn btn-secondary btn-sm">Reiniciar</button>
+
 		</div>
+
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
 			<div id="main">
+
 				<div class="test  spinner">
 					<div class="bounce1"></div>
 					<div class="bounce2"></div>
 					<div class="bounce3"></div>
 				</div>
+
 			</div>
 
 			<small class="d-block text-right mt-3">
-				<a href="#">Github</a>
+				<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
 			</small>
 
 		</div>

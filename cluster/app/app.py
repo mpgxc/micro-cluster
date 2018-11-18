@@ -11,6 +11,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/spiner')
+def spiner():
+    return render_template('spiner.html')
+
+
 @app.route('/worker')
 def update():
     return render_template('worker.html',  nodes = map_network())
