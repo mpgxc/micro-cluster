@@ -45,7 +45,7 @@ Arquitetura e estruturação do sistema - Cluster de processamento de texto em g
 #### Modelo padrão mapreduce
 ![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
 #### Arquitetura mapreduce aplicado neste trabalho
-![academico](mapreduce.png)
+![academico](img/mapreduce.png)
 ## Segurança
 		
 Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64¹ e um método de compactação **hash_string** para garantir segurança e menores quantidades de dados trafegando na rede via sockets, possibilitando uma comunicação mais rápido de node à node.
@@ -57,7 +57,7 @@ Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpg
 
 Foi utilizado o conceito de criptografia ponto à ponto bastante conhecido graças aos mensageiros com o Whatsapp, onde a criptografia e decriptografia acontece em ambos os nós de uma conexão.
 #### Representação do sistema de criptografia utilizado no Cluster e modelo base.
-![academico](cript.png)
+![academico](img/cript.png)
 
 ## Arquitetura geral do Sistema Cluster
-![academico](main.png)
+![academico](img/main.png)
