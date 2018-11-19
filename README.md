@@ -48,9 +48,9 @@ Arquitetura e estruturação do sistema - Cluster de processamento de texto em g
 		
 Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64¹ e um método de compactação **hash_string** para garantir segurança e menores quantidades de dados trafegando na rede via sockets, possibilitando uma comunicação mais rápido de node à node.
 
-	¹Base64 é um método para codificação de dados para transferência na Internet (codificação MIME para transferência 
-	de conteúdo). É utilizado frequentemente para transmitir dados binários por meios de transmissão que lidam apenas
-	com texto, como por exemplo para enviar arquivos anexos por e-mail.
+	¹Base64 é um método para codificação de dados para transferência na Internet (codificação MIME para 
+	transferência de conteúdo). É utilizado frequentemente para transmitir dados binários por meios de
+	transmissão que lidam apenas com texto, como por exemplo para enviar arquivos anexos por e-mail.
 
 
 ![academico](cript.png)
