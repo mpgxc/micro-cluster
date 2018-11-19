@@ -46,5 +46,9 @@ Arquitetura e estruturação do sistema - Cluster de processamento de texto em g
 
 ## Segurança
 		
-Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64 e a compactação da **hash_string** para garantir segurança e menores quantidades de dados em bytes trafegando na rede via sockets, possibilitando uma comunicação mais rápido de node para node.
+Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64 e um método de compactação **hash_string** para garantir segurança e menores quantidades de dados trafegando na rede via sockets, possibilitando uma comunicação mais rápido de node à node.
+![academico](cript.png)
+
+
+## Arquitetura geral do Sistema Cluster
 ![academico](main.png)
