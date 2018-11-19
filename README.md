@@ -51,9 +51,10 @@ Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpg
 	¹Base64 é um método para codificação de dados para transferência na Internet (codificação MIME para 
 	transferência de conteúdo). É utilizado frequentemente para transmitir dados binários por meios de
 	transmissão que lidam apenas com texto, como por exemplo para enviar arquivos anexos por e-mail.
-	[Wikipédia](https://www.infowester.com/cluster.php)
+	[Wikipédia]- https://pt.wikipedia.org/wiki/Base64
 
-
+Foi utilizado o conceito de criptografia ponto à ponto bastante conhecido graças aos mensageiros com o Whatsapp, onde a criptografia e decriptografia acontece em ambos os nós de uma conexão.
+### Representação do sistema de criptografia utilizado no Cluster
 ![academico](cript.png)
 
 
