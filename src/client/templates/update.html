@@ -73,6 +73,11 @@
         chart.draw(data, options);
     }
     google.charts.setOnLoadCallback(drawChart);
+    
+    $(window).resize(function(){
+	  	drawChart();
+	  	drawChart2();
+	});
 
     $(document).ready(function () {
         $('#detailed').click(function () {
