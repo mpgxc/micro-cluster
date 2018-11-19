@@ -42,8 +42,10 @@ Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes caracterí
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
+#### Modelo padrão mapreduce
 ![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
-
+#### Arquitetura mapreduce aplicado neste trabalho
+![academico](mapreduce.png)
 ## Segurança
 		
 Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64¹ e um método de compactação **hash_string** para garantir segurança e menores quantidades de dados trafegando na rede via sockets, possibilitando uma comunicação mais rápido de node à node.
