@@ -27,7 +27,7 @@ Originalmente, Beowulf é o nome de um poema extenso e bastante antigo, cujo man
 Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes características:
 
 - Entre os nós, deve haver pelo menos um que atue como mestre para exercer o controle dos demais. As máquinas mestres são chamadas de front-end; as demais, de back-end. Há a possibilidade de existir mais de um nó no front-end para que cada um realize tarefas específicas, como monitoramento, por exemplo;
-![academico](cluster.png)
+![academico](img/cluster.png)
 - a comunicação entre os nós pode ser feita por redes do tipo Ethernet, mais comuns e mais baratas, como você já sabe;
 
 - Não é necessário o uso de hardware exigente, nem específico. A ideia é a de se aproveitar componentes que possam ser encontrados facilmente. Até mesmo PCs considerados obsoletos podem ser utilizá-los;
