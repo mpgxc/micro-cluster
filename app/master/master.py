@@ -101,6 +101,10 @@ class ServerWorker(threading.Thread):
             count_ident += 1
 
         count = 0
+
+        result_set = [] # recebe os resultados de cada node do cluster
+        
+
         while count < quant_slave:
 
             ident, msg = worker.recv_multipart()
