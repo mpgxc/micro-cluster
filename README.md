@@ -16,7 +16,7 @@ Cada computador que faz parte do cluster recebe o nome de nó (ou node). Teorica
 
 Os nós do cluster devem ser interconectados, preferencialmente, por uma tecnologia de rede conhecida, para fins de manutenção e controle de custos, como a Ethernet. É extremamente importante que o padrão adotado permita a inclusão ou a retirada de nós com o cluster em funcionamento, do contrário, o trabalho de remoção e substituição de um computador que apresenta problemas, por exemplo, faria a aplicação como um todo parar.
 
-[Fonte](https://www.infowester.com/cluster.php)
+[Infowester](https://www.infowester.com/cluster.php)
 
 # Cluster Beowulf
 
@@ -38,7 +38,7 @@ Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes caracterí
 
 - Deve-se fazer uso de uma biblioteca de comunicação apropriada, como a PVM (Parallel Virtual Machine) ou a MPI (Message Passing Interface). Ambas são direcionadas à troca de mensagens entre os nós, mas o MPI pode ser considerado mais avançado que o PVM, uma vez que consegue trabalhar com comunicação para todos os computadores ou para apenas um determinado grupo.
 
-[Fonte](https://www.infowester.com/cluster.php)
+[Infowester](https://www.infowester.com/cluster.php)
 
 ## Cluster Computer - MapReduce
 Arquitetura e estruturação do sistema - Cluster de processamento de texto em grandes volumes (BigData), modelo mapReduce - WordCount example.
@@ -51,6 +51,7 @@ Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpg
 	¹Base64 é um método para codificação de dados para transferência na Internet (codificação MIME para 
 	transferência de conteúdo). É utilizado frequentemente para transmitir dados binários por meios de
 	transmissão que lidam apenas com texto, como por exemplo para enviar arquivos anexos por e-mail.
+	[Wikipédia](https://www.infowester.com/cluster.php)
 
 
 ![academico](cript.png)
