@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="static/img/favicon.ico">
+
+    <title>Offcanvas template for Bootstrap</title>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/offcanvas.css" rel="stylesheet">
+    <link href="static/css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<script>
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            ['Positivos', 34],
+            ['Negativos', 65],
+            ['Neutros', 12],
+        ]
+        );
+        var piechart_options = {
+            title: 'Porcentagem das emoções',
+            is3D: true
+        };
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        piechart.draw(data, piechart_options);
+
+        var barchart_options = {
+            title: 'Quantidade de Tweets',
+            legend: 'none',
+        };
+        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+        barchart.draw(data, barchart_options);
+    };
+    google.charts.setOnLoadCallback(drawChart2);
+    function drawChart2() {
+        // Define the chart to be drawn.
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Asia'],
+            ['2012', 900],
+            ['2013', 1000],
+            ['2014', 1170],
+            ['2015', 1250],
+            ['2016', 1530],
+            ['2013', 2000],
+            ['2014', 1170],
+            ['2015', 1250],
+            ['2016', 1530],
+            ['2013', 1000],
+            ['2014', 1170],
+            ['2015', 1250],
+            ['2016', 1530]
+        ]);
+
+        var options = { title: 'Population (in millions)' };
+
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.ColumnChart(document.getElementById('container'));
+        chart.draw(data, options);
+    }
+    google.charts.setOnLoadCallback(drawChart);
+
+    $(document).ready(function () {
+        $('#detailed').click(function () {
+            $('#graphs').load("{{ url_for('update') }} #graphs", function () {
+            });
+        });
+    });
+
+    function spiner() {
+        $('#mains').load("{{ url_for('spiner') }} #mains", function () {
+        });
+    }
+
+</script>
+
+<body class="bg-light">
+
+    <main role="main" class="container">
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+            <img class="mr-3" src="static/img/logo.png" alt="" width="100" height="100">
+            <div class="lh-100">
+                <h4 class="mb-0 text-white lh-100">Contador de Palavras</h4>
+                <small>Aplicativo de processamento de dados textuais<h5> <code> <b> mpgx.c</code>ounter </b> </h5>
+                </small>
+            </div>
+        </div>
+
+        <div style=" text-align: center;" class="my-3 p-3 bg-white rounded shadow-sm">
+            <img width="300px" src="static/img/main.png">
+        </div>
+        <div id="mains"></div>
+
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="piechart_div"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="barchart_div"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="my-3 p-3 bg-white rounded shadow-sm ">
+            <div style="margin: 15px" class="card .col-sm-5 .col-md-6 box-shadow">
+                <div id="container"></div>
+            </div>
+
+        </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
