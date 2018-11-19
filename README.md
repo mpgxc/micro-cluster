@@ -1,4 +1,4 @@
-# Sistemas Distribuídos![academico](http://www.transparentpng.com/download/networking/picture-networking-9.png)
+# Sistemas Distribuídos
 Segundo Tanenbaum, um sistema distribuído é um conjunto de computadores independentes entre si (e até diferentes), ligados através de uma rede de dados, que se apresentam aos utilizadores como um sistema único e coerente.
 ## Exemplos:
 - Sistemas de pesquisas (motores de busca)
