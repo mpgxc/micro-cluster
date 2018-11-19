@@ -54,7 +54,7 @@ Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpg
 	[Wikipédia]- https://pt.wikipedia.org/wiki/Base64
 
 Foi utilizado o conceito de criptografia ponto à ponto bastante conhecido graças aos mensageiros com o Whatsapp, onde a criptografia e decriptografia acontece em ambos os nós de uma conexão.
-### Representação do sistema de criptografia utilizado no Cluster
+#### Representação do sistema de criptografia utilizado no Cluster e modelo base.
 ![academico](cript.png)
 
 ## Arquitetura geral do Sistema Cluster
