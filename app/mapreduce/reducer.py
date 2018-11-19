@@ -1,6 +1,7 @@
 from operator import itemgetter
 import sys
 
+
 def reducer(file):
 
     current_word = None
@@ -8,14 +9,14 @@ def reducer(file):
     word = None
 
     out = open('final.txt', 'a')
-    
+
     for line in file:
-        
+
         line = line.strip()
 
-        word  = line['text']
+        word = line['text']
         count = line['count']
-        
+
         try:
             count = int(count)
         except ValueError:

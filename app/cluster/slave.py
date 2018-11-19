@@ -29,7 +29,7 @@ class ClientTask(threading.Thread):
         socket = context.socket(mySocket.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
-        socket.connect('tcp://localhost:5570')
+        socket.connect('tcp://localhost:5571')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
@@ -68,7 +68,7 @@ class ClientTask(threading.Thread):
 
 def main():
 
-    client = ClientTask(200)
+    client = ClientTask(300)
     client.start()
 
 

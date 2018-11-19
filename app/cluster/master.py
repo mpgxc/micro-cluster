@@ -5,7 +5,7 @@ import json
 import time
 import base64
 import zlib
-
+from readdata import load
 
 def compacta(text):
     return zlib.compress(text)
@@ -26,7 +26,7 @@ class ServerTask(threading.Thread):
 
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
-        frontend.bind('tcp://*:5570')
+        frontend.bind('tcp://*:5571')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -57,21 +57,33 @@ class ServerWorker(threading.Thread):
         tprint('Servidor TRABALAHNDO')
         quant_slave = 3
         count = 0
-        
+
         lastid = None
 
-        '''
+        myNodes = []
+
         while count < quant_slave:
-            
+
             ident, msg = worker.recv_multipart()
+            result = json.loads(msg)
+
+            tprint('Requisição [%s] Node [%s]' %  (result['code'], ident.decode()))
+
+            myNodes.append(ident)  # Guardando referência do meu node
+
             lastid = ident
 
-            print("Worker %s" %(ident))
-            print(count)
+            print("Worker %s" % (ident))
+
             if lastid != ident.decode():
                 count += 1
-                
+
         print("Terminou!")
+
+
+        data = load()
+
+
         '''
 
         while True:
@@ -98,14 +110,15 @@ class ServerWorker(threading.Thread):
 
             #print(">> ", compactado)
 
-            '''
+     
             print("TEXTO CIFRADO 1:", cifrado1)
             print("TEXTO CIFRADO 2:", cifrado2)
-            '''
+   
 
             idWorker = ident.decode()
             worker.send_multipart([ident, compactado])
         worker.close()
+        '''
 
 
 def main():
