@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="static/img/favicon.ico">
+
+	<title>Offcanvas template for Bootstrap</title>
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="static/css/offcanvas.css" rel="stylesheet">
+	<link href="static/css/main.css" rel="stylesheet">
+
+</head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script>
+
+	function spiner() {
+		$('#main').load("{{ url_for('spiner') }} #main", function () {
+		});
+	}
+
+</script>
+
+<body onload="make()" class="bg-light">
+
+	<main role="main" class="container">
+		<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+			<img class="mr-3" src="static/img/logo.png" alt="" width="100" height="100">
+			<div class="lh-100">
+				<h4 class="mb-0 text-white lh-100">Contador de Palavras</h4>
+				<small>Aplicativo de processamento de dados textuais<h5> <code> <b> mpgx.c</code>ounter </b> </h5> </small>
+			</div>
+		</div>
+
+		<div class="my-3 p-3 bg-white rounded shadow-sm">
+			<h6 class="border-bottom border-gray pb-2 mb-0">Administração</h6>
+			<br>
+			<button type="button" class="btn btn-primary btn-sm">Iniciar</button>
+			<button type="button" class="btn btn-secondary btn-sm">Reiniciar</button>
+
+		</div>
+
+		<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+			<div class="container">
+				<h5>Volume de dados</h5>
+				<form action="/action_page.php">
+					<div class="form-group">
+						<label for="comment">Insira aqui a massa de dados para a busca das palavras</label>
+						<textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</form>
+			</div>
+
+			<div id="main">
+
+				<div class="test  spinner">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+
+			</div>
+
+			<small class="d-block text-right mt-3">
+				<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
+			</small>
+
+		</div>
+	</main>
+
+</body>
+
+</html>
