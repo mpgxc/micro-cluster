@@ -27,6 +27,10 @@ def make_jack(num_worker, file = 'data.txt'):
 
     return clusters
 
+
+
+
+
 def simulate_worker():
 
     count = 1

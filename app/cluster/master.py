@@ -6,6 +6,9 @@ import time
 import base64
 import zlib
 from readdata import load
+from txt_to_json import make as data_json
+from jack_module import make_jack
+
 
 def compacta(text):
     return zlib.compress(text)
@@ -26,12 +29,12 @@ class ServerTask(threading.Thread):
 
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
-        frontend.bind('tcp://*:5571')
+        frontend.bind('tcp://*:5575')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
 
-        #workers = []
+        # workers = []
 
         worker = ServerWorker(context)
         worker.start()
@@ -65,9 +68,6 @@ class ServerWorker(threading.Thread):
         while count < quant_slave:
 
             ident, msg = worker.recv_multipart()
-            result = json.loads(msg)
-
-            tprint('Requisição [%s] Node [%s]' %  (result['code'], ident.decode()))
 
             myNodes.append(ident)  # Guardando referência do meu node
 
@@ -80,50 +80,39 @@ class ServerWorker(threading.Thread):
 
         print("Terminou!")
 
+        # recebendo data e convertendo em JSOn
+        data = data_json(
+            load()
+        )
+        # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
+        parts = make_jack(count, data)
 
-        data = load()
-
-
-        '''
-
-        while True:
- 
-            ident, msg = worker.recv_multipart()
-            result = json.loads(msg)
-
-            tprint('Requisição [%s] Node [%s]' % (result['code'], ident.decode()))
-
-            print(msg)
-
-            # -------------AQUI VAI FICAR A ENTRADA DOS DADOS---------------
-
-            data = {
-                "code": 500,
-                "resp": "Opaa...",
-            }
-
-            # --------------------------------------------------------------
+        count_ident = 0
+        for line in parts:
 
             # aqui se cifra a mensagem em base64
-            cifrado = base64.b64encode(str(data).encode('utf-8'))
+            cifrado = base64.b64encode(str(line).encode('utf-8'))
             compactado = compacta(cifrado)
+            # print(">> ", compactado)
 
-            #print(">> ", compactado)
+            # idWorker = ident.decode()
 
-     
-            print("TEXTO CIFRADO 1:", cifrado1)
-            print("TEXTO CIFRADO 2:", cifrado2)
-   
+            worker.send_multipart([myNodes[count_ident], compactado]) # Enviando para cada node uma parte do arquivo
+            count_ident += 1
 
-            idWorker = ident.decode()
-            worker.send_multipart([ident, compactado])
+        count = 0
+        while count < quant_slave:
+
+            ident, msg = worker.recv_multipart()
+            result = json.loads(msg)
+            print(result['pal'], ' >> ',result['val'])
+
         worker.close()
-        '''
 
 
 def main():
 
-    server = ServerTask()
+    server= ServerTask()
     server.start()
     server.join()
 

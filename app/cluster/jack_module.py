@@ -1,7 +1,7 @@
-from mapper import mapper
+#from mapper import mapper
 
 '''
-    Essa função monta clusters como base no números de nodes do Cluster.. Simples
+    Essa função monta clusters como base no números de nodes do Cluster.. Simples..
     Caso o cluster possuir até 3 nodes, o json é dividido em 3 partes, e enviado para cada node, para assim ser trabalhado
 '''
 
@@ -25,7 +25,9 @@ def make_jack(num_worker, file):
 
         if count == workers:
 
-            result = sorted(result, key = lambda i: i['text']) #linha pra ordenar JSON baseao no campo de texto
+            #Ainda não sei se é necessário
+            #result = sorted(result, key = lambda i: i['text']) #linha pra ordenar JSON baseao no campo de texto
+            
             clusters.append(result)
             workers += int(qtd / num_worker)
             result = []

@@ -11,12 +11,6 @@ def descompacta(text):
     return zlib.decompress(text)
 
 
-def tprint(msg):
-
-    sys.stdout.write(msg + '\n')
-    sys.stdout.flush()
-
-
 class ClientTask(threading.Thread):
 
     def __init__(self, id):
@@ -29,46 +23,40 @@ class ClientTask(threading.Thread):
         socket = context.socket(mySocket.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
-        socket.connect('tcp://localhost:5571')
+        socket.connect('tcp://localhost:5575')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
         poll = mySocket.Poller()
         poll.register(socket, mySocket.POLLIN)
-        reqs = 0
 
-        while True:
+        socket.send_json('Hit')
 
-            reqs = reqs + 1
-            print('Req #%d sent..' % (reqs))
+        msg = socket.recv()  # converte de String para JSON
 
-            data = {
-                "code": reqs,
-            }
+        descompactado = descompacta(msg)  # descompactando texto
 
-            socket.send_json(data)
+        decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
-            msg = socket.recv()  # converte de String para JSON
+        msg = eval(decifrado.decode('utf-8'))
 
-            print(">> ", msg)
+        print(msg)
+        #tprint('Cliente %s recebido > %s ' % (identity, msg['text']))
 
-            descompactado = descompacta(msg)  # descompactando texto
+        # Exemplo de como enviar resultado  do wordcount - mapreduce
+        socket.send_json({'pal': 'Amor', 'val': '23'})
 
-            decifrado = base64.b64decode(descompactado)  # decifra mensagem
+        time.sleep(1)
 
-            msg = eval(decifrado.decode('utf-8'))
-
-            tprint('Cliente %s recebido > %s ' % (identity, msg['resp']))
-
-            time.sleep(1)
-
+    '''
         socket.close()
         context.term()
+    '''
 
 
 def main():
 
-    client = ClientTask(300)
+    client = ClientTask(100)
     client.start()
 
 
