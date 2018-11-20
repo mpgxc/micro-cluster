@@ -48,7 +48,7 @@ class ClientTask(threading.Thread):
         decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
         msg = eval(decifrado.decode('utf-8'))
-
+        print(msg)
         # salvando texto json no arquivo de texto.txt
 
         save_txt(
@@ -64,9 +64,12 @@ class ClientTask(threading.Thread):
         # Agora é hora de aplicar o 'reducer.py'
         reducer('cache/mapper_output.txt')
 
+
+        results = [line for line in open('cache/reducer_output.txt')]
         cifrado = base64.b64encode(str(
-            [line for line in open('reducer_output.txt')]
+            results
         ).encode('utf-8'))
+
 
         compactado = compacta(cifrado)
 
@@ -78,7 +81,7 @@ class ClientTask(threading.Thread):
 
 def main():
 
-    client = ClientTask(300)
+    client = ClientTask(100)
     client.start()
 
 

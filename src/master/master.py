@@ -8,7 +8,8 @@ import zlib
 from readdata import load
 from txt_to_json import make as data_json
 from jack_module import make_jack
-
+import os
+from final_reducer import reducer
 
 def descompacta(text):
     return zlib.decompress(text)
@@ -62,7 +63,7 @@ class ServerWorker(threading.Thread):
         worker = self.context.socket(mySocket.DEALER)
         worker.connect('inproc://backend')
         tprint('Servidor TRABALAHNDO')
-        quant_slave = 1
+        quant_slave = 2
         count = 0
 
         lastid = None
@@ -105,8 +106,6 @@ class ServerWorker(threading.Thread):
 
         count = 0
 
-        result_set = []  # recebe os resultados de cada node do cluster
-
         while count < quant_slave:
 
             ident, msg = worker.recv_multipart()
@@ -114,8 +113,17 @@ class ServerWorker(threading.Thread):
             descompactado = descompacta(msg)  # descompactando texto
             decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
-            print('>> ', decifrado[0])
+            out = open('cache/mapper_output.txt', 'a')
+            for line in eval(decifrado):  # EVAL converte bytes em Array List
+                out.write(str(line))
+            
+            count += 1
+        
+        out.close()
 
+        #executa o final reducing
+        reducer('cache/mapper_output.txt')
+        os.remove('cache/mapper_output.txt') #Deletando file tmp
         worker.close()
 
 
