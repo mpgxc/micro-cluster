@@ -9,7 +9,6 @@ import multiprocessing
 app = Flask(__name__)
 
 
-
 def graphs():
     data_set = load('data.txt')
     return redirect(url_for('update', data_set=data_set))
@@ -17,16 +16,14 @@ def graphs():
 
 def makeDoubleTask():
 
-    pCor = multiprocessing.Process(target = receive)
-    pUp = multiprocessing.Process(target = update)
+    pCor = multiprocessing.Process(target=receive)
+    pUp = multiprocessing.Process(target=graphs)
 
     pCor.start()
     pCor.join()
 
     pUp.start()
     pUp.join()
-
-
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -41,7 +38,7 @@ def index():
     else:
 
         send(texto)
-        receive()
+        makeDoubleTask()
 
     return render_template('index.html', campos=campos)
 
