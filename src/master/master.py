@@ -89,34 +89,32 @@ class ServerWorker(threading.Thread):
 
         count_ident = 0
         for line in parts:
-
             # aqui se cifra a mensagem em base64
             cifrado = base64.b64encode(str(line).encode('utf-8'))
             compactado = compacta(cifrado)
             # print(">> ", compactado)
-
             # idWorker = ident.decode()
 
-            worker.send_multipart([myNodes[count_ident], compactado]) # Enviando para cada node uma parte do arquivo
+            # Enviando para cada node uma parte do arquivo
+            worker.send_multipart([myNodes[count_ident], compactado])
             count_ident += 1
 
         count = 0
 
-        result_set = [] # recebe os resultados de cada node do cluster
-        
+        result_set = []  # recebe os resultados de cada node do cluster
 
         while count < quant_slave:
 
             ident, msg = worker.recv_multipart()
             result = json.loads(msg)
-            print(result['pal'], ' >> ',result['val'])
+            print(result['pal'], ' >> ', result['val'])
 
         worker.close()
 
 
 def main():
 
-    server= ServerTask()
+    server = ServerTask()
     server.start()
     server.join()
 

@@ -5,6 +5,8 @@ import json
 import time
 import base64
 import zlib
+from json_to_txt import make as json_txt
+from save_file import save_txt
 
 
 def descompacta(text):
@@ -40,7 +42,19 @@ class ClientTask(threading.Thread):
 
         msg = eval(decifrado.decode('utf-8'))
 
-        print(msg)
+        # salvando texto json no arquivo de texto.txt
+
+        save_txt(
+            json_txt(
+                msg
+            )
+        )
+
+        #Agora proximo paso é mapear
+        
+
+
+
         #tprint('Cliente %s recebido > %s ' % (identity, msg['text']))
 
         # Exemplo de como enviar resultado  do wordcount - mapreduce
