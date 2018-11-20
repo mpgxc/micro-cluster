@@ -66,7 +66,7 @@ class ServerWorker(threading.Thread):
         worker = self.context.socket(mySocket.DEALER)
         worker.connect('inproc://backend')
         tprint('Servidor TRABALAHNDO')
-        quant_slave = 3
+        quant_slave = 1
         count = 0
 
         lastid = None
@@ -96,12 +96,11 @@ class ServerWorker(threading.Thread):
         parts = make_jack(count, data)
 
         count_ident = 0
+
         for line in parts:
             # aqui se cifra a mensagem em base64
             cifrado = base64.b64encode(str(line).encode('utf-8'))
             compactado = compacta(cifrado)
-            # print(">> ", compactado)
-            # idWorker = ident.decode()
 
             # Enviando para cada node uma parte do arquivo
             worker.send_multipart([myNodes[count_ident], compactado])
@@ -117,20 +116,21 @@ class ServerWorker(threading.Thread):
             decifrado = base64.b64decode(descompactado)  # decifra mensagem
 
             out = open('cache/mapper_output.txt', 'a')
-            for line in eval(decifrado):  # EVAL converte bytes em Array List
+            # EVAL converte bytes em Array List
+            for line in eval(decifrado):
                 out.write(str(line))
 
             count += 1
 
         out.close()
-        #Sorting results mapper
+        # Sorting results mapper
         make_order('cache/mapper_output.txt')
         # executa o final reducing
         reducer('cache/mapper_output.txt')
-
-        #send(load('cache/reducer_output.txt'))  # Envia pro cliente
-
-        os.remove('cache/mapper_output.txt')  # Deletando file tmp
+        # Envia pro cliente
+        send(load('cache/reducer_output.txt'))
+        # Deletando file tmp
+        os.remove('cache/mapper_output.txt')
 
         print("Task - Completa!")
 
@@ -142,5 +142,3 @@ def main():
     server = ServerTask()
     server.start()
     server.join()
-
-main()

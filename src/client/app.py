@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from sender import send, receive
 from forms import Entrada
+from read_load import load
 import requests
 import time
 
@@ -17,10 +18,13 @@ def index():
     if palavras == '' or texto == '':
         print('Faz nada!')
     else:
+        
         send(texto)
+        receive()
+        data_set = load('data.txt')
 
-        return redirect(url_for('update'))
-    return render_template('index.html', campos=campos)
+        return redirect(url_for('update', data_set = data_set))
+    return render_template('index.html', campos = campos)
 
 
 @app.route('/update')

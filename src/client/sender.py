@@ -8,7 +8,6 @@ def send(file):
     channel.queue_declare(queue='master')
 
     channel.basic_publish(exchange='', routing_key='master', body = file)
-    print(" [x] Enviado")
     connection.close()
 
 def receive():

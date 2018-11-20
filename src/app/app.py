@@ -34,18 +34,18 @@ def make_connection():
 
 
 def task_connection():
-
-    tasK = threading.Thread(name="t1", target=makeDoubleTask)
-    tasK.start()
+    return threading.Thread(name="Worker-Master", target=makeDoubleTask)
 
 
 def makeDoubleTask():
-
+    
+    
     pPal = multiprocessing.Process(target=make_connection)
     pCor = multiprocessing.Process(target=main)
 
     pCor.start()
     pPal.start()
+
 
     pCor.join()
     pPal.join()
@@ -54,7 +54,7 @@ def makeDoubleTask():
 @app.route('/')
 def index():
 
-    task_connection()  # Aguarda requisição do Cliente
+    task_connection().start() # Aguarda requisição do Cliente
     # makeDoubleTask()
 
     # main()  # inicia o Master
