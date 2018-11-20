@@ -7,10 +7,17 @@ import base64
 import zlib
 from json_to_txt import make as json_txt
 from save_file import save_txt
+from mapper import mapper
+from sorting import sorting
+from reducer import reducer
 
 
 def descompacta(text):
     return zlib.decompress(text)
+
+
+def compacta(text):
+    return zlib.compress(text)
 
 
 class ClientTask(threading.Thread):
@@ -50,27 +57,28 @@ class ClientTask(threading.Thread):
             )
         )
 
-        #Agora proximo paso é mapear
-        
+        # Agora proximo paso é mapear com 'mapper.py'
+        mapper('cache/data.txt')
+        # Agora temos que fazer o sorting
+        sorting('cache/mapper_output.txt')
+        # Agora é hora de aplicar o 'reducer.py'
+        reducer('cache/mapper_output.txt')
 
+        cifrado = base64.b64encode(str(
+            [line for line in open('reducer_output.txt')]
+        ).encode('utf-8'))
 
+        compactado = compacta(cifrado)
 
-        #tprint('Cliente %s recebido > %s ' % (identity, msg['text']))
+        socket.send(compactado) #Enviando o resultado do reducing pro Master
 
-        # Exemplo de como enviar resultado  do wordcount - mapreduce
-        socket.send_json({'pal': 'Amor', 'val': '23'})
-
-        time.sleep(1)
-
-    '''
         socket.close()
         context.term()
-    '''
 
 
 def main():
 
-    client = ClientTask(100)
+    client = ClientTask(300)
     client.start()
 
 

@@ -1,19 +1,16 @@
 from preprocess import make_tokens
-from txt_to_json import make as makeJson
 
-def mapper(lang, file):
 
-    out = []
+def mapper(file):
 
-    for line in makeJson(file):
+    lang = 'portuguese'
+    out = open("cache/mapper_output.txt", "w")
 
-        text = line['text']
+    for line in open(file):
 
-        tweet = make_tokens(text, lang)
+        tweet = make_tokens(line, lang)
         tweet = tweet.strip()
         words = tweet.split()
-        
+
         for word in words:
-            out.append({"text": word, "count": 1})
-            
-    return out
+            out.write('%s\t%s' % (word, 1)+"\n")

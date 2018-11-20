@@ -1,13 +1,10 @@
 import sys
 
-def sorting():
+def sorting(file):
 
-    out = open(sys.argv[1], 'r+')
-    data = [line.strip() for line in open(sys.argv[1])]
+    out = open(file, 'r+')
+    data = [line.strip() for line in open(file)]
     data.sort()
     for line in data:
         out.write(str(line)+"\n")
     out.close()
-
-if __name__ == '__main__':
-    sorting()

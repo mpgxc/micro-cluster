@@ -8,14 +8,11 @@ def reducer(file):
     current_count = 0
     word = None
 
-    out = open('final.txt', 'a')
+    out = open('reducer_output.txt', 'w')
 
-    for line in file:
-
+    for line in open(file):
         line = line.strip()
-
-        word = line['text']
-        count = line['count']
+        word, count = line.split('\t', 1)
 
         try:
             count = int(count)
@@ -27,16 +24,10 @@ def reducer(file):
 
         else:
             if current_word:
-                print('%s\t%s' % (current_word, current_count))
                 out.write('%s\t%s' % (current_word, current_count)+'\n')
             current_count = count
             current_word = word
 
     if current_word == word:
-        print('%s\t%s' % (current_word, current_count))
         out.write('%s\t%s' % (current_word, current_count)+'\n')
     out.close()
-
-
-if __name__ == '__main__':
-    reducer()

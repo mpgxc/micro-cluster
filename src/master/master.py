@@ -10,6 +10,10 @@ from txt_to_json import make as data_json
 from jack_module import make_jack
 
 
+def descompacta(text):
+    return zlib.decompress(text)
+
+
 def compacta(text):
     return zlib.compress(text)
 
@@ -58,7 +62,7 @@ class ServerWorker(threading.Thread):
         worker = self.context.socket(mySocket.DEALER)
         worker.connect('inproc://backend')
         tprint('Servidor TRABALAHNDO')
-        quant_slave = 3
+        quant_slave = 1
         count = 0
 
         lastid = None
@@ -106,8 +110,11 @@ class ServerWorker(threading.Thread):
         while count < quant_slave:
 
             ident, msg = worker.recv_multipart()
-            result = json.loads(msg)
-            print(result['pal'], ' >> ', result['val'])
+
+            descompactado = descompacta(msg)  # descompactando texto
+            decifrado = base64.b64decode(descompactado)  # decifra mensagem
+
+            print('>> ', decifrado[0])
 
         worker.close()
 
