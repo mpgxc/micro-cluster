@@ -4,12 +4,14 @@ import threading
 import json
 import time
 import base64
-import zlib
 from readdata import load
+import zlib
 from txt_to_json import make as data_json
 from jack_module import make_jack
 import os
 from final_reducer import reducer
+from sender import send
+
 
 def descompacta(text):
     return zlib.decompress(text)
@@ -116,14 +118,20 @@ class ServerWorker(threading.Thread):
             out = open('cache/mapper_output.txt', 'a')
             for line in eval(decifrado):  # EVAL converte bytes em Array List
                 out.write(str(line))
-            
+
             count += 1
-        
+
         out.close()
 
-        #executa o final reducing
+        # executa o final reducing
         reducer('cache/mapper_output.txt')
-        os.remove('cache/mapper_output.txt') #Deletando file tmp
+
+        send(load('cache/reducer_output.txt'))  # Envia pro cliente
+
+        os.remove('cache/mapper_output.txt')  # Deletando file tmp
+
+        print("Task - Completa!")
+
         worker.close()
 
 
@@ -132,7 +140,3 @@ def main():
     server = ServerTask()
     server.start()
     server.join()
-
-
-if __name__ == "__main__":
-    main()

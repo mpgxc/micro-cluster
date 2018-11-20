@@ -1,0 +1,4 @@
+bruxa	8
+lobo	8
+bruxa	8
+lobo	8

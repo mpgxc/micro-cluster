@@ -1,25 +1,37 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+from sender import send, receive
+from forms import Entrada
 import requests
-import time 
+import time
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+
+    campos = Entrada(request.form)
+    palavras = str(campos.Palavras.data)
+    texto = str(campos.Texto.data)
+
+    if palavras == '' or texto == '':
+        print('Faz nada!')
+    else:
+        send(texto)
+
+        return redirect(url_for('update'))
+    return render_template('index.html', campos=campos)
 
 
 @app.route('/update')
 def update():
-    data = "Mateus Pintos Garcia"
-    time.sleep(5)
-    return render_template('update.html', data = data )
+    return render_template('update.html')
 
 
 @app.route('/spiner')
 def spiner():
     return render_template('spiner.html')
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=8075, debug=True)

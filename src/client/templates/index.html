@@ -43,7 +43,10 @@
 
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
 
-			<div class="container">
+			<form method="POST" class="form-signin">
+
+				{{ campos.csrf_token }}
+
 				<div class="form-group">
 					<label for="formGroupExampleInput">Palavras a serem pesquisadas</label>
 					<label class="sr-only" for="inlineFormInputGroup">sdsdds</label>
@@ -51,7 +54,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Palavras</div>
 						</div>
-						<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Ex: 'Amor, Ódio, Informática'">
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio, Informática'")}}
 					</div>
 				</div>
 
@@ -64,10 +67,11 @@
 
 				<div class="form-group">
 					<label for="comment">Insira aqui a massa de dados para a busca das palavras</label>
-					<textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+					{{campos.Texto(id="comment", rows="5", class = "form-control " ,placeholder="Insira seu dataset aqui")}}
 				</div>
-				<a class="btn btn-primary" onclick="spiner()" href="/update" role="button">Enviar</a>
-			</div>
+				<button  onclick="spiner()" class="btn btn-primary" type="submit">Enviar</button>
+		</div>
+
 		</div>
 	</main>
 </body>
