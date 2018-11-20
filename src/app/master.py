@@ -10,6 +10,7 @@ from txt_to_json import make as data_json
 from jack_module import make_jack
 import os
 from final_reducer import reducer
+from sorting import sorting as make_order
 from sender import send
 
 
@@ -36,7 +37,7 @@ class ServerTask(threading.Thread):
 
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
-        frontend.bind('tcp://*:5575')
+        frontend.bind('tcp://192.168.0.3:5575')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -65,7 +66,7 @@ class ServerWorker(threading.Thread):
         worker = self.context.socket(mySocket.DEALER)
         worker.connect('inproc://backend')
         tprint('Servidor TRABALAHNDO')
-        quant_slave = 2
+        quant_slave = 3
         count = 0
 
         lastid = None
@@ -122,11 +123,12 @@ class ServerWorker(threading.Thread):
             count += 1
 
         out.close()
-
+        #Sorting results mapper
+        make_order('cache/mapper_output.txt')
         # executa o final reducing
         reducer('cache/mapper_output.txt')
 
-        send(load('cache/reducer_output.txt'))  # Envia pro cliente
+        #send(load('cache/reducer_output.txt'))  # Envia pro cliente
 
         os.remove('cache/mapper_output.txt')  # Deletando file tmp
 
@@ -140,3 +142,5 @@ def main():
     server = ServerTask()
     server.start()
     server.join()
+
+main()
