@@ -31,7 +31,7 @@
 			<img class="mr-3" src="static/img/logo.png" alt="" width="100" height="100">
 			<div class="lh-100">
 				<h4 class="mb-0 text-white lh-100">Contador de Palavras</h4>
-				<small>Aplicativo de processamento de dados textuais<h5> <code> <b> mpgx.c</code>ounter </b> </h5> </small>
+				<small>Aplicativo de Processamento de Dados Textuais<h5> <code> <b> mpgx.counter</code> </b> </h5> </small>
 			</div>
 		</div>
 
@@ -52,15 +52,32 @@
 					<label class="sr-only" for="inlineFormInputGroup">sdsdds</label>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
-							<div class="input-group-text">Palavras</div>
+							<div class="input-group-text">1º palavra</div>
 						</div>
 						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
 						Informática'")}}
+						
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">2º palavra</div>
+						</div>
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
+						Informática'")}}
+						
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">3º palavra</div>
+						</div>
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
+						Informática'")}}
+						
 					</div>
 				</div>
 
 				<div class="alert alert-info">
-					<strong>Observação!</strong> Digite as palavras separadas por virgula!<strong> <code> Ex: Amor, Ódio, Informática.</code>
+					<strong>Observação!</strong> Digite as palavras separadas por vírgula!<strong> <code> Ex: Amor, Ódio, Informática.</code>
 					</strong>
 				</div>
 
