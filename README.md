@@ -36,8 +36,6 @@ Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes caracterí
 
 - Os nós devem se dedicar exclusivamente ao cluster;
 
-- Deve-se fazer uso de uma biblioteca de comunicação apropriada, como a PVM (Parallel Virtual Machine) ou a MPI (Message Passing Interface). Ambas são direcionadas à troca de mensagens entre os nós, mas a MPI pode ser considerada mais avançado que a PVM, uma vez que consegue trabalhar com comunicação para todos os computadores ou para apenas um determinado grupo.
-
 [Infowester](https://www.infowester.com/cluster.php)
 
 ## Cluster Computer - MapReduce
