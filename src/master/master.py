@@ -37,7 +37,7 @@ class ServerTask(threading.Thread):
 
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
-        frontend.bind('tcp://192.168.0.3:5575')
+        frontend.bind('tcp://192.168.0.3:5576')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -123,18 +123,26 @@ class ServerWorker(threading.Thread):
             count += 1
 
         out.close()
+        print("Aqui 1")
         # Sorting results mapper
         make_order('cache/mapper_output.txt')
+        print("Aqui 2")
         # executa o final reducing
         reducer('cache/mapper_output.txt')
+        print("Aqui 3")
         # Envia pro cliente
-        send(load('cache/reducer_output.txt'))
+
+        send("".join([line for line in open('cache/reducer_output.txt')]))
+
+        print("Aqui 4")
         # Deletando file tmp
         os.remove('cache/mapper_output.txt')
+        print("Aqui 5")
 
         print("Task - Completa!")
 
         worker.close()
+        print("Aqui 6")
 
 
 def main():

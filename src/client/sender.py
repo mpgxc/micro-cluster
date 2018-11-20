@@ -1,5 +1,5 @@
 import pika
-
+from read_load import load
 
 def send(file):
 
@@ -18,12 +18,13 @@ def receive():
 
 
     def callback(ch, method, properties, body):
-        print(" [x] Recebido %r" % body)
+        print(" [x] Recebido Cliente %r" % body)
 
         Saida = open('data.txt','w')
         Saida.write(str(body.decode()))
+        Saida.close()
 
     channel.basic_consume(callback, queue='cliente', no_ack=True)
     channel.start_consuming()
-
-    return -1
+    channel.stop_consuming()
+    return None

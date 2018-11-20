@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import requests
 from controlers.main import map_network
 import pika
-
+import subprocess
 from threading import Thread
 import threading
 import multiprocessing
@@ -55,10 +55,7 @@ def makeDoubleTask():
 def index():
 
     task_connection()  # Aguarda requisição do Cliente
-    # makeDoubleTask()
-
-    # main()  # inicia o Master
-
+    
     return render_template('index.html')
 
 
@@ -73,4 +70,4 @@ def update():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8070, debug=True)
+    app.run(host='127.0.0.1', port=8071, debug=True)

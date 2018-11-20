@@ -4,9 +4,20 @@ from forms import Entrada
 from read_load import load
 import requests
 import time
+import multiprocessing
 
 app = Flask(__name__)
 
+
+def makeDoubleTask():
+
+    pCor = multiprocessing.Process(target=receive)
+    pCor.start()
+    pCor.join()
+
+
+def update():
+    return redirect(url_for('update', data_set=data_set))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,13 +29,13 @@ def index():
     if palavras == '' or texto == '':
         print('Faz nada!')
     else:
-        
+
         send(texto)
         receive()
         data_set = load('data.txt')
 
-        return redirect(url_for('update', data_set = data_set))
-    return render_template('index.html', campos = campos)
+        
+    return render_template('index.html', campos=campos)
 
 
 @app.route('/update')
@@ -38,4 +49,4 @@ def spiner():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8075, debug=True)
+    app.run(host='127.0.0.1', port=8076, debug=True)
