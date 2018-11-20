@@ -1,0 +1,6 @@
+mateus	45
+orrana	14
+emanuel	12
+data	34
+celular	26
+note	17
