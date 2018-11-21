@@ -14,6 +14,8 @@ from sorting import sorting as make_order
 from sender import send
 from call_nodes import connectNodes
 from save_ips import save_ips_name
+from count_nodes import make_count
+
 
 def descompacta(text):
     return zlib.decompress(text)
@@ -73,7 +75,8 @@ class ServerWorker(threading.Thread):
 
             connectNodes()  # Faz uma chamada RPC, para conectar os nodes ao master
 
-            quant_slave = 1
+            quant_slave = make_count('cache/nodes.txt')
+
             count = 0
 
             lastid = None
