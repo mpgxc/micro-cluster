@@ -37,8 +37,9 @@ def index():
 
 @app.route('/update')
 def update():
-
+    #tem como melhorar, mas não vai ser agora....
     while True:
+        time.sleep(1)
         try:
             if load('data.txt') == []:
                 pass
@@ -47,8 +48,8 @@ def update():
                 break
         except:
             pass
+
     os.remove('data.txt')
-    
     return render_template('update.html', data=data_set)
 
 

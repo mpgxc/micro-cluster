@@ -12,6 +12,7 @@ import os
 from final_reducer import reducer
 from sorting import sorting as make_order
 from sender import send
+from call_nodes import connectNodes
 
 
 def descompacta(text):
@@ -65,10 +66,13 @@ class ServerWorker(threading.Thread):
     def run(self):
 
         while True:
-            
+
             worker = self.context.socket(mySocket.DEALER)
             worker.connect('inproc://backend')
             tprint('Servidor TRABALAHNDO')
+
+            connectNodes()  # Faz uma chamada RPC, para conectar os nodes ao master
+
             quant_slave = 1
             count = 0
 
@@ -84,16 +88,22 @@ class ServerWorker(threading.Thread):
 
                 lastid = ident
 
-                print("Worker %s" % (ident))
+                print("Worker %s" % (ident.decode()))
 
                 if lastid != ident.decode():
                     count += 1
 
+            while True:
+                time.sleep(1)
+                try:
+                    myData = open("data.txt")
+                    break
+                except:
+                    pass
             print("Terminou!")
-
             # recebendo data e convertendo em JSOn
             data = data_json(
-                load()
+                [line for line in myData]
             )
             # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
             parts = make_jack(count, data)
@@ -101,7 +111,7 @@ class ServerWorker(threading.Thread):
             count_ident = 0
 
             for line in parts:
-                # aqui se cifra a mensagem em base64
+                    # aqui se cifra a mensagem em base64
                 cifrado = base64.b64encode(str(line).encode('utf-8'))
                 compactado = compacta(cifrado)
 
@@ -136,8 +146,10 @@ class ServerWorker(threading.Thread):
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
+            os.remove('data.txt')
 
             print("Complete Task!")
+
             worker.close()
 
 

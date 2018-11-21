@@ -11,6 +11,7 @@ from save_file import save_txt
 from mapper import mapper
 from sorting import sorting
 from reducer import reducer
+import zerorpc
 
 
 def descompacta(text):
@@ -84,11 +85,29 @@ class ClientTask(threading.Thread):
         '''
 
 
-def main():
+'''
+def main(code):
 
-    client = ClientTask(200)
+    client = ClientTask(code)
     client.start()
+
+if __name__ == "__main__":
+    main(100)
+'''
+
+
+class HelloRPC(object):
+
+    def start(self, code):
+
+        client = ClientTask(code)
+        client.start()
 
 
 if __name__ == "__main__":
-    main()
+
+    print("[ * ] - Servidor RPC - Slave")
+    
+    Connect = zerorpc.Server(HelloRPC())
+    Connect.bind("tcp://0.0.0.0:5432")
+    Connect.run()
