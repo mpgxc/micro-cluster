@@ -4,6 +4,7 @@ import threading
 import json
 import time
 import base64
+import os
 import zlib
 from json_to_txt import make as json_txt
 from save_file import save_txt
@@ -32,7 +33,7 @@ class ClientTask(threading.Thread):
         socket = context.socket(mySocket.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
-        socket.connect('tcp://192.168.0.3:5599')
+        socket.connect('tcp://localhost:5555')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
@@ -64,19 +65,23 @@ class ClientTask(threading.Thread):
         # Agora é hora de aplicar o 'reducer.py'
         reducer('cache/mapper_output.txt')
 
-
         results = [line for line in open('cache/reducer_output.txt')]
         cifrado = base64.b64encode(str(
             results
         ).encode('utf-8'))
 
-
         compactado = compacta(cifrado)
 
-        socket.send(compactado) #Enviando o resultado do reducing pro Master
+        socket.send(compactado)  # Enviando o resultado do reducing pro Master
 
+        os.remove('cache/data.txt')
+        os.remove('cache/mapper_output.txt')
+        os.remove('cache/reducer_output.txt')
+
+        '''
         socket.close()
         context.term()
+        '''
 
 
 def main():

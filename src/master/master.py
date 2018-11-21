@@ -37,7 +37,8 @@ class ServerTask(threading.Thread):
 
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
-        frontend.bind('tcp://192.168.0.3:5599')
+        # frontend.bind('tcp://192.168.0.3:5599')
+        frontend.bind('tcp://*:5555')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -63,86 +64,81 @@ class ServerWorker(threading.Thread):
 
     def run(self):
 
-        worker = self.context.socket(mySocket.DEALER)
-        worker.connect('inproc://backend')
-        tprint('Servidor TRABALAHNDO')
-        quant_slave = 1
-        count = 0
+        while True:
+            
+            worker = self.context.socket(mySocket.DEALER)
+            worker.connect('inproc://backend')
+            tprint('Servidor TRABALAHNDO')
+            quant_slave = 1
+            count = 0
 
-        lastid = None
+            lastid = None
 
-        myNodes = []
+            myNodes = []
 
-        while count < quant_slave:
+            while count < quant_slave:
 
-            ident, msg = worker.recv_multipart()
+                ident, msg = worker.recv_multipart()
 
-            myNodes.append(ident)  # Guardando referência do meu node
+                myNodes.append(ident)  # Guardando referência do meu node
 
-            lastid = ident
+                lastid = ident
 
-            print("Worker %s" % (ident))
+                print("Worker %s" % (ident))
 
-            if lastid != ident.decode():
+                if lastid != ident.decode():
+                    count += 1
+
+            print("Terminou!")
+
+            # recebendo data e convertendo em JSOn
+            data = data_json(
+                load()
+            )
+            # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
+            parts = make_jack(count, data)
+
+            count_ident = 0
+
+            for line in parts:
+                # aqui se cifra a mensagem em base64
+                cifrado = base64.b64encode(str(line).encode('utf-8'))
+                compactado = compacta(cifrado)
+
+                # Enviando para cada node uma parte do arquivo
+                worker.send_multipart([myNodes[count_ident], compactado])
+                count_ident += 1
+
+            count = 0
+
+            while count < quant_slave:
+
+                ident, msg = worker.recv_multipart()
+
+                descompactado = descompacta(msg)  # descompactando texto
+                decifrado = base64.b64decode(descompactado)  # decifra mensagem
+
+                out = open('cache/mapper_output.txt', 'a')
+                # EVAL converte bytes em Array List
+                for line in eval(decifrado):
+                    out.write(str(line))
+
                 count += 1
 
-        print("Terminou!")
+            out.close()
 
-        # recebendo data e convertendo em JSOn
-        data = data_json(
-            load()
-        )
-        # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
-        parts = make_jack(count, data)
+            # Sorting results mapper
+            make_order('cache/mapper_output.txt')
+            # executa o final reducing
+            reducer('cache/mapper_output.txt')
+            # Envia pro cliente
+            send("".join([line for line in open('cache/reducer_output.txt')]))
+            # Deletando file tmp
+            os.remove('cache/mapper_output.txt')
+            os.remove('cache/reducer_output.txt')
 
-        count_ident = 0
-
-        for line in parts:
-            # aqui se cifra a mensagem em base64
-            cifrado = base64.b64encode(str(line).encode('utf-8'))
-            compactado = compacta(cifrado)
-
-            # Enviando para cada node uma parte do arquivo
-            worker.send_multipart([myNodes[count_ident], compactado])
-            count_ident += 1
-
-        count = 0
-
-        while count < quant_slave:
-
-            ident, msg = worker.recv_multipart()
-
-            descompactado = descompacta(msg)  # descompactando texto
-            decifrado = base64.b64decode(descompactado)  # decifra mensagem
-
-            out = open('cache/mapper_output.txt', 'a')
-            # EVAL converte bytes em Array List
-            for line in eval(decifrado):
-                out.write(str(line))
-
-            count += 1
-
-        out.close()
-        print("Aqui 1")
-        # Sorting results mapper
-        make_order('cache/mapper_output.txt')
-        print("Aqui 2")
-        # executa o final reducing
-        reducer('cache/mapper_output.txt')
-        print("Aqui 3")
-        # Envia pro cliente
-
-        send("".join([line for line in open('cache/reducer_output.txt')]))
-
-        print("Aqui 4")
-        # Deletando file tmp
-        os.remove('cache/mapper_output.txt')
-        print("Aqui 5")
-
-        print("Task - Completa!")
-
-        worker.close()
-        print("Aqui 6")
+            print("Complete Task!")
+            worker.close()
 
 
 def main():
