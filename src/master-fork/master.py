@@ -13,7 +13,7 @@ from final_reducer import reducer
 from sorting import sorting as make_order
 from sender import send
 from call_nodes import connectNodes
-from save_ips import save_ips_name
+
 
 def descompacta(text):
     return zlib.decompress(text)
@@ -82,10 +82,7 @@ class ServerWorker(threading.Thread):
 
             while count < quant_slave:
 
-
                 ident, msg = worker.recv_multipart()
-                
-                save_ips_name(ident)
 
                 myNodes.append(ident)  # Guardando referência do meu node
 

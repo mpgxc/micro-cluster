@@ -13,8 +13,10 @@ def is_up(addr):
 
 
 def map_network():
-    
     lista = []
-    for ip in open("cache/nodes.txt"):
-       lista.append(ip)
+    for ip in range(1, 256):
+        addr = network + str(ip)
+        if is_up(addr):
+            lista.append(getfqdn(addr))
+
     return lista
