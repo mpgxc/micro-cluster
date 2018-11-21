@@ -73,11 +73,11 @@
         chart.draw(data, options);
     }
     google.charts.setOnLoadCallback(drawChart);
-    
-    $(window).resize(function(){
-	  	drawChart();
-	  	drawChart2();
-	});
+
+    $(window).resize(function () {
+        drawChart();
+        drawChart2();
+    });
 
     $(document).ready(function () {
         $('#detailed').click(function () {
@@ -107,6 +107,10 @@
 
         <div style=" text-align: center;" class="my-3 p-3 bg-white rounded shadow-sm">
             <img width="300px" src="static/img/main.png">
+            {% for line in data %}
+            <h1>{{ line }}</h1>
+            <p>hora hora</p>
+            {% endfor %}
         </div>
         <div id="mains"></div>
 

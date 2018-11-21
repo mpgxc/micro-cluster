@@ -82,7 +82,7 @@ def close_connection(exception):
 def index():
 
     task_connection()  # Aguarda requisição do Cliente
-    
+
     return render_template('index.html')
   
 def makeInsert():
@@ -126,4 +126,8 @@ def delete_entry():
     return render_template('remocao.html', node=res)
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(host='127.0.0.1', port=8072, debug=True)
+=======
+    app.run(host='127.0.0.1', port=2525, debug=True)
+>>>>>>> 3a14ed2e39e679f5f504c9b1227ef519b2b73217

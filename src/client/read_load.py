@@ -1,3 +1,7 @@
 
 def load(file):
-    return [line for line in open(file)]
+    
+    data = []
+    for line in open(file):
+        data.append(line)
+    return data

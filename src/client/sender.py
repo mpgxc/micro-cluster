@@ -26,5 +26,7 @@ def receive():
 
     channel.basic_consume(callback, queue='cliente', no_ack=True)
     channel.start_consuming()
+
     channel.stop_consuming()
-    return None
+    connection.close()
+    
