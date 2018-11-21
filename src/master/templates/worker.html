@@ -6,18 +6,23 @@
                 <tr>
                     <th scope="col">Node</th>
                     <th scope="col">Endereço</th>
+                    <th scope="col">Função</th>
                     <th scope="col">Status</th>
+
                 </tr>
             </thead>
             <tbody>
                 
-                {% for  line in nodes %}
+                {% for line in node %}
                     <tr>
                         <th scope="row">
                             <img width="25px" src="static/img/pc.png">
+                            <br><code>{{ line[0] }}</code>
                         </th>
-                        <td><code>{{ line }}</code></td>
+                        <td><code>{{ line[1] }}</code></td>
+                        <td><code>{{ line[2] }}</code></td>
                         <td>Disponível</td>
+                        
                     </tr>
                 {% endfor %}
 

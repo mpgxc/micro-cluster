@@ -55,6 +55,5 @@ def update():
 def spiner():
     return render_template('spiner.html')
 
-
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8076, debug=True)
