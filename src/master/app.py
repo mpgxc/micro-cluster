@@ -126,8 +126,10 @@ def delete_entry():
     return render_template('remocao.html', node=res)
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    app.run(host='127.0.0.1', port=8072, debug=True)
-=======
-    app.run(host='127.0.0.1', port=2525, debug=True)
->>>>>>> 3a14ed2e39e679f5f504c9b1227ef519b2b73217
+    ids = [1,2,3,4,5]
+    time.sleep(3)
+    return render_template('worker.html', nodes = ids)
+
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=2520, debug=True)

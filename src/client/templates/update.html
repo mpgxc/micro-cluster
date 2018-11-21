@@ -27,24 +27,25 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-            ['Positivos', 34],
-            ['Negativos', 65],
-            ['Neutros', 12],
-        ]
-        );
-        var piechart_options = {
-            title: 'Porcentagem das emoções',
-            is3D: true
-        };
-        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
-        piechart.draw(data, piechart_options);
+            ['{{ pals[0][0] }}', {{ pals[0][1] }}],
+    ['{{ pals[1][0] }}', {{ pals[1][1] }}],
+        ['{{ pals[2][0] }}', {{ pals[2][1] }}],
+        ]);
 
-        var barchart_options = {
-            title: 'Quantidade de Tweets',
-            legend: 'none',
-        };
-        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-        barchart.draw(data, barchart_options);
+
+    var piechart_options = {
+        title: 'Porcentagem das emoções',
+        is3D: true
+    };
+    var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+    piechart.draw(data, piechart_options);
+
+    var barchart_options = {
+        title: 'Quantidade de Tweets',
+        legend: 'none',
+    };
+    var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+    barchart.draw(data, barchart_options);
     };
     google.charts.setOnLoadCallback(drawChart2);
     function drawChart2() {
@@ -103,14 +104,11 @@
                 <small>Aplicativo de Processamento de Dados Textuais<h5> <code> <b> mpgx.counter</code> </b> </h5>
                 </small>
             </div>
+
         </div>
 
         <div style=" text-align: center;" class="my-3 p-3 bg-white rounded shadow-sm">
             <img width="300px" src="static/img/main.png">
-            {% for line in data %}
-            <h1>{{ line }}</h1>
-            <p>hora hora</p>
-            {% endfor %}
         </div>
         <div id="mains"></div>
 
@@ -141,7 +139,11 @@
             </div>
 
         </div>
+        <div style=" text-align: center;" class="my-3 p-3 bg-white rounded shadow-sm">
+            <h2>Tempo de execução</h2>
+            <h3> <code>{{ tempo }} </code> Segundos</h3> 
         </div>
+        <div id="mains"></div>
 
     </main>
 </body>
