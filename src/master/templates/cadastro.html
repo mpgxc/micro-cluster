@@ -16,38 +16,6 @@
 </head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
-<script>
-	/*
-	$(document).ready(function () { /// Wait till page is loaded
-		setInterval(timingLoad, 10000);
-		function timingLoad() {
-			$('#main').load("{{ url_for('update') }} #main", function () {
-				/// can add another function here
-			});
-		}
-	});
-	*/
-	function spiner() { /// Wait till page is loaded
-
-		$('#main').load("{{ url_for('spiner') }} #main", function () {
-		});
-	}
-
-	function make() { /// Wait till page is loaded
-
-		$('#main').load("{{ url_for('update') }} #main", function () {
-		});
-	}
-
-	$(document).ready(function () {
-		$('#detailed').click(function () {
-			$('#main').load("{{ url_for('update') }} #main", function () {
-			});
-		});
-	});
-
-</script>
-
 <body onload="make()" class="bg-light">
 
 	<main role="main" class="container">
@@ -83,6 +51,55 @@
 				<a href="remocao.html"><input type="button"value="Remover" class="btn btn-primary btn-sm"></a>
 			</small>
 
+		</div>
+
+		<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+			<form method="POST" class="form-signin">
+
+				{{ campos.csrf_token }}
+
+				<div class="form-group">
+					<label for="formGroupExampleInput">Palavras a serem pesquisadas</label>
+					<label class="sr-only" for="inlineFormInputGroup">sdsdds</label>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">1º palavra</div>
+						</div>
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
+						Informática'")}}
+						
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">2º palavra</div>
+						</div>
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
+						Informática'")}}
+						
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">3º palavra</div>
+						</div>
+						{{campos.Palavras(id="inlineFormInputGroup", type="text" ,class = "form-control " ,placeholder="Ex: 'Amor, Ódio,
+						Informática'")}}
+						
+					</div>
+				</div>
+
+				<div class="alert alert-info">
+					<strong>Observação!</strong> Digite as palavras separadas por vírgula!<strong> <code> Ex: Amor, Ódio, Informática.</code>
+					</strong>
+				</div>
+
+				<h5>Volume de dados</h5>
+
+				<div class="form-group">
+					<label for="comment">Insira aqui a massa de dados para a busca das palavras</label>
+					{{campos.Texto(id="comment", rows="5", class = "form-control " ,placeholder="Insira seu dataset aqui")}}
+				</div>
+				<button onclick="spiner()" class="btn btn-primary" type="submit">Enviar</button>
 		</div>
 	</main>
 
