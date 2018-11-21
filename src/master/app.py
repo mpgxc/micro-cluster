@@ -66,8 +66,10 @@ def spiner():
 
 @app.route('/worker')
 def update():
-    return render_template('worker.html',  nodes=map_network())
+    ids = [1,2,3,4,5]
+    time.sleep(3)
+    return render_template('worker.html', nodes = ids)
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=2525, debug=True)
+    app.run(host='127.0.0.1', port=2520, debug=True)

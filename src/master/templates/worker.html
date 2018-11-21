@@ -10,15 +10,15 @@
                 </tr>
             </thead>
             <tbody>
-                
-                {% for  line in nodes %}
-                    <tr>
-                        <th scope="row">
-                            <img width="25px" src="static/img/pc.png">
-                        </th>
-                        <td><code>{{ line }}</code></td>
-                        <td>Disponível</td>
-                    </tr>
+
+                {% for line in nodes %}
+                <tr>
+                    <th scope="row">
+                        <img width="25px" src="static/img/pc.png">
+                    </th>
+                    <td><code>{{ line }}</code></td>
+                    <td>Disponível</td>
+                </tr>
                 {% endfor %}
 
             </tbody>

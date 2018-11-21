@@ -7,6 +7,9 @@ import time
 import multiprocessing
 import threading
 import os
+from words import make_words_save
+from count_words import count_words
+
 app = Flask(__name__)
 
 
@@ -20,24 +23,35 @@ def task_connection():
 def index():
 
     campos = Entrada(request.form)
-    palavras = str(campos.Palavras.data)
+    pal1 = str(campos.Palavras1.data)
+    pal2 = str(campos.Palavras2.data)
+    pal3 = str(campos.Palavras3.data)
     texto = str(campos.Texto.data)
 
-    if palavras == '' or texto == '':
+    if pal1 == '' or pal2 == '' or pal3 == '' or texto == '':
         print('Faz nada!')
     else:
 
         send(texto)
         task_connection()
 
+        make_words_save([pal1, pal2, pal3])  # Palavras bases para pesquisar
+
         return redirect(url_for('update'))
 
     return render_template('index.html', campos=campos)
 
 
+import time
+import timeit
+
+
 @app.route('/update')
 def update():
-    #tem como melhorar, mas não vai ser agora....
+    # tem como melhorar, mas não vai ser agora....
+
+    inicio = timeit.default_timer()
+
     while True:
         time.sleep(1)
         try:
@@ -48,9 +62,16 @@ def update():
                 break
         except:
             pass
+    fim = timeit.default_timer()
+
+    result = fim - inicio
+
+    pals = count_words()
 
     os.remove('data.txt')
-    return render_template('update.html', data=data_set)
+    os.remove('words.txt')
+
+    return render_template('update.html', data=data_set, pals=pals, tempo=str(result)[:4])
 
 
 @app.route('/spiner')
