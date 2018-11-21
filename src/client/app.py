@@ -5,25 +5,15 @@ from read_load import load
 import requests
 import time
 import multiprocessing
-
+import threading
+import os
 app = Flask(__name__)
 
 
-def graphs():
-    data_set = load('data.txt')
-    return redirect(url_for('update', data_set=data_set))
+def task_connection():
 
-
-def makeDoubleTask():
-
-    pCor = multiprocessing.Process(target=receive)
-    pUp = multiprocessing.Process(target=graphs)
-
-    pCor.start()
-    pCor.join()
-
-    pUp.start()
-    pUp.join()
+    tasK = threading.Thread(name="t1", target=receive)
+    tasK.start()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -38,14 +28,28 @@ def index():
     else:
 
         send(texto)
-        makeDoubleTask()
+        task_connection()
+
+        return redirect(url_for('update'))
 
     return render_template('index.html', campos=campos)
 
 
 @app.route('/update')
 def update():
-    return render_template('update.html')
+
+    while True:
+        try:
+            if load('data.txt') == []:
+                pass
+            else:
+                data_set = load('data.txt')
+                break
+        except:
+            pass
+    os.remove('data.txt')
+    
+    return render_template('update.html', data=data_set)
 
 
 @app.route('/spiner')
