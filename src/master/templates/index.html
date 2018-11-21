@@ -42,6 +42,7 @@
 	$(document).ready(function () {
 		$('#detailed').click(function () {
 			$('#main').load("{{ url_for('update') }} #main", function () {
+
 			});
 		});
 	});
@@ -55,7 +56,7 @@
 			<img class="mr-3" src="static/img/logo.png" alt="" width="100" height="100">
 			<div class="lh-100">
 				<h4 class="mb-0 text-white lh-100">Cluster - Gerenciamento</h4>
-				<small>Cluster de Processamento de Dados Textuais<h5> <code> <b> MapReduce </b> </code> </h5> </small>
+				<small>Cluster de processamento de dados textuais<h5> <code> <b> MapReduce </b> </code> </h5> </small>
 			</div>
 		</div>
 
@@ -78,9 +79,7 @@
 			</div>
 
 			<small class="d-block text-right mt-3">
-				<a href="cadastro.html"><input type="button"value="Adicionar" class="btn btn-primary btn-sm"></a>
-				<button id="detailed"  onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
-				<a href="remocao.html"><input type="button"value="Remover" class="btn btn-primary btn-sm"></a>
+				<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
 			</small>
 
 		</div>
