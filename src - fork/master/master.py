@@ -40,7 +40,7 @@ class ServerTask(threading.Thread):
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
         # frontend.bind('tcp://192.168.0.3:5599')
-        frontend.bind('tcp://192.168.0.5:10500')
+        frontend.bind('tcp://*:9500')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -103,14 +103,13 @@ class ServerWorker(threading.Thread):
                 except:
                     pass
    
-            print("Leu Dados!")
-            
+
             # recebendo data e convertendo em JSOn
             data = data_json(
                 [line for line in myData]
             )
             # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
-            parts = make_jack(int(quant_slave), data)  # PRESTA antenção aqui
+            parts = make_jack(quant_slave, data)  # PRESTA antenção aqui
 
             count_ident = 0
 

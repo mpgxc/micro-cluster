@@ -23,7 +23,6 @@ def send(file):
 
     params = pika.URLParameters(url)
     connection = pika.BlockingConnection(params)
-
     channel = connection.channel()  # start a channel
     channel.queue_declare(queue="master")  # Declare a queue
     channel.basic_publish(exchange='', routing_key="master", body=file)
@@ -63,7 +62,6 @@ def receive():
 
     params = pika.URLParameters(url)
     connection = pika.BlockingConnection(params)
-
     channel = connection.channel()
     channel.queue_declare(queue='cliente')
 

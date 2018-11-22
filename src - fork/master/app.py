@@ -56,7 +56,7 @@ def remove_values(name):
 
     conn = sqlite3.connect(DATABASE)
     sql = "delete from users where name=?"
-
+    
     cur = conn.cursor()
     try:
         cur.execute(sql, (name,))
@@ -92,7 +92,6 @@ def make_connection():
 
     params = pika.URLParameters(url)
     connection = pika.BlockingConnection(params)
-
     channel = connection.channel()
     channel.queue_declare(queue='master')
 
@@ -137,7 +136,7 @@ def index():
 
     qtd = make_count()
 
-    return render_template('index.html', qtd=qtd)
+    return render_template('index.html', qtd = qtd)
 
 
 @app.route('/spiner')
@@ -168,9 +167,8 @@ def remove():
     if campos.name.data != "":
         remove_values(campos.name.data)
         return redirect(url_for('sucesso'))
-
+    
     return render_template('remover.html', campos=campos)
-
 
 @app.route('/worker')
 def update():

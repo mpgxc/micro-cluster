@@ -1,5 +1,6 @@
-import pika
+import pika 
 import os
+
 
 
 def send(file):
@@ -10,8 +11,8 @@ def send(file):
 
     params = pika.URLParameters(url)
     connection = pika.BlockingConnection(params)
-
     channel = connection.channel()  # start a channel
     channel.queue_declare(queue="cliente")  # Declare a queue
     channel.basic_publish(exchange='', routing_key="cliente", body=file)
     connection.close()
+
