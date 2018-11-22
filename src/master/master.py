@@ -13,8 +13,8 @@ from final_reducer import reducer
 from sorting import sorting as make_order
 from sender import send
 from call_nodes import connectNodes
-from save_ips import save_ips_name
 from count_nodes import make_count
+from quantos import make_quant
 
 
 def descompacta(text):
@@ -41,7 +41,7 @@ class ServerTask(threading.Thread):
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
         # frontend.bind('tcp://192.168.0.3:5599')
-        frontend.bind('tcp://*:6666')
+        frontend.bind('tcp://192.168.0.5:9500')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -73,9 +73,11 @@ class ServerWorker(threading.Thread):
             worker.connect('inproc://backend')
             tprint('Servidor TRABALAHNDO')
 
-            connectNodes()  # Faz uma chamada RPC, para conectar os nodes ao master
+            # Faz uma chamada RPC, para conectar os nodes ao master
+            quant_slave = make_quant()
+            connectNodes(quant_slave)
 
-            quant_slave = make_count('cache/nodes.txt')
+            # os.remove("cache/nodes.txt")
 
             count = 0
 
@@ -83,18 +85,15 @@ class ServerWorker(threading.Thread):
 
             myNodes = []
 
-            while count < quant_slave:
-
+            while count < int(quant_slave):
 
                 ident, msg = worker.recv_multipart()
-                
-                save_ips_name(ident)
 
                 myNodes.append(ident)  # Guardando referência do meu node
 
                 lastid = ident
 
-                print("Worker %s" % (ident.decode()))
+                print("Worker: %s" % (ident.decode()))
 
                 if lastid != ident.decode():
                     count += 1
@@ -112,7 +111,7 @@ class ServerWorker(threading.Thread):
                 [line for line in myData]
             )
             # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
-            parts = make_jack(count, data)
+            parts = make_jack(quant_slave, data)  # PRESTA antenção aqui
 
             count_ident = 0
 
@@ -127,7 +126,7 @@ class ServerWorker(threading.Thread):
 
             count = 0
 
-            while count < quant_slave:
+            while count < int(quant_slave):
 
                 ident, msg = worker.recv_multipart()
 
@@ -161,6 +160,11 @@ class ServerWorker(threading.Thread):
 
 def main():
 
+    try:
+        # --------------------
+        os.remove('data.txt')
+    except:
+        pass
     server = ServerTask()
     server.start()
     server.join()

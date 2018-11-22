@@ -23,19 +23,25 @@ def task_connection():
 def index():
 
     campos = Entrada(request.form)
+
     pal1 = str(campos.Palavras1.data)
     pal2 = str(campos.Palavras2.data)
     pal3 = str(campos.Palavras3.data)
+
     texto = str(campos.Texto.data)
 
     if pal1 == '' or pal2 == '' or pal3 == '' or texto == '':
-        print('Faz nada!')
+        pass
     else:
 
         send(texto)
         task_connection()
 
+        time.sleep(0.5)
+
         make_words_save([pal1, pal2, pal3])  # Palavras bases para pesquisar
+
+        time.sleep(0.5)
 
         return redirect(url_for('update'))
 
@@ -67,16 +73,22 @@ def update():
     result = fim - inicio
 
     pals = count_words()
-
+    print("----------------------------------------------------")
+    print("RESULT", result)
+    print("----------------------------------------------------")
+    print("PALS", pals)
+    print("----------------------------------------------------")
+    
     os.remove('data.txt')
     os.remove('words.txt')
 
-    return render_template('update.html', data=data_set, pals=pals, tempo=str(result)[:4])
+    return render_template('update.html', data=data_set, pals=pals, tempo=str(result))
 
 
 @app.route('/spiner')
 def spiner():
     return render_template('spiner.html')
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8076, debug=True)

@@ -8,18 +8,43 @@ import threading
 import multiprocessing
 import subprocess
 import time
-
+import sys
 
 from master import main
-
+import os
 
 app = Flask(__name__)
 
 
 def make_connection():
 
+    url = os.environ.get(
+        'CLOUDAMQP_URL', 'amqp://ccamejce:pXan0kUexXzAYv3k92uIzCfjATB9QMF4@porpoise.rmq.cloudamqp.com/ccamejce'
+    )
+
+    params = pika.URLParameters(url)
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
+    channel.queue_declare(queue='master')
+
+    def callback(ch, method, properties, body):
+
+        Saida = open('data.txt', 'w')
+        Saida.write(str(body.decode()))
+        Saida.close()
+
+    channel.basic_consume(callback, queue='master', no_ack=True)
+    channel.start_consuming()
+
+    channel.stop_consuming()
+    connection.close()
+
+
+'''
+def make_connection():
+
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
+        pika.ConnectionParameters(host='amqp://ccamejce:pXan0kUexXzAYv3k92uIzCfjATB9QMF4@porpoise.rmq.cloudamqp.com/ccamejce'))
     channel = connection.channel()
     channel.queue_declare(queue='master')
 
@@ -28,9 +53,11 @@ def make_connection():
 
         Saida = open('data.txt', 'w')
         Saida.write(str(body.decode()))
+        Saida.close()
 
     channel.basic_consume(callback, queue='master', no_ack=True)
     channel.start_consuming()
+'''
 
 
 def task_connection():
@@ -66,8 +93,16 @@ def spiner():
 
 @app.route('/worker')
 def update():
+    time.sleep(1.2)
     return render_template('worker.html',  nodes=map_network())
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=25235, debug=True)
+
+    QUANTED = sys.argv[1]
+    
+    sk = open("cache/quant.txt", "w")
+    sk.write(QUANTED)
+    sk.close()
+
+    app.run(host='127.0.0.1', port=45259, debug=True)

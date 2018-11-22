@@ -34,7 +34,7 @@ class ClientTask(threading.Thread):
         socket = context.socket(mySocket.DEALER)
         identity = u'worker-%d' % self.id
         socket.identity = identity.encode('ascii')
-        socket.connect('tcp://localhost:6666')
+        socket.connect('tcp://localhost:9999')
 
         print('Cliente %s INICIALIZADO' % (identity))
 
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     print("[ * ] - Servidor RPC - Slave")
     
     Connect = zerorpc.Server(HelloRPC())
-    Connect.bind("tcp://0.0.0.0:5432")
+    Connect.bind("tcp://192.168.0.5:7000")
     Connect.run()
