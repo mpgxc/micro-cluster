@@ -63,25 +63,32 @@
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
 			<h6 class="border-bottom border-gray pb-2 mb-0">Administração</h6>
 			<br>
-			<button type="button" class="btn btn-primary btn-sm">Iniciar</button>
+
+			<a class="btn btn-primary btn-sm" href="/add" role="button">Cadastar</a>
+			<a class="btn btn btn-danger btn-sm" href="/rem" role="button">Remover</a>
 
 		</div>
 
-		<div class="my-3 p-3 bg-white rounded shadow-sm">
-			<div id="main">
-
-				<div class="test  spinner">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
+		<div  class="my-3 p-3 bg-white rounded shadow-sm">
+			{% if qtd == 0 %}
+				<div style="text-align:center" class="jumbotron">
+					<h2>Nenhum Node cadastrado</h2>
 				</div>
+			{% else %}
+				<div id="main">
 
-			</div>
+					<div class="test  spinner">
+						<div class="bounce1"></div>
+						<div class="bounce2"></div>
+						<div class="bounce3"></div>
+					</div>
 
-			<small class="d-block text-right mt-3">
+				</div>
+			{% endif %}
+
+			<small class=" d-block text-right mt-3">
 				<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
 			</small>
-
 		</div>
 	</main>
 

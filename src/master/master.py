@@ -14,7 +14,6 @@ from sorting import sorting as make_order
 from sender import send
 from call_nodes import connectNodes
 from count_nodes import make_count
-from quantos import make_quant
 
 
 def descompacta(text):
@@ -74,10 +73,8 @@ class ServerWorker(threading.Thread):
             tprint('Servidor TRABALAHNDO')
 
             # Faz uma chamada RPC, para conectar os nodes ao master
-            quant_slave = make_quant()
-            connectNodes(quant_slave)
-
-            # os.remove("cache/nodes.txt")
+            quant_slave = make_count()
+            connectNodes()
 
             count = 0
 
@@ -99,13 +96,14 @@ class ServerWorker(threading.Thread):
                     count += 1
 
             while True:
-                time.sleep(1)
+                time.sleep(0.5)
                 try:
                     myData = open("data.txt")
                     break
                 except:
                     pass
-            print("Terminou!")
+   
+
             # recebendo data e convertendo em JSOn
             data = data_json(
                 [line for line in myData]

@@ -1,34 +1,22 @@
 import zerorpc
+import sqlite3
 
 
-def get_ips():
-    lista = []
-    codes = []
-
-    for line in open("cache/ips.txt"):
-        ip, code = line.split("-")
-        lista.append(ip.replace("\n", ""))
-        codes.append(code.replace("\n", ""))
-
-    return lista, codes
+DATABASE = "./database.db"
 
 
-def connectNodes(quant):
+def connectNodes():
 
-    start = 0
-    ips, codes = get_ips()
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
 
-    data = open("cache/nodes.txt", "w")
+    cursor = cur.execute('select * from users;')
 
-    while start < int(quant):
-        print("*")
+    for line in cursor:
+        '''
         Connect = zerorpc.Client()
-        Connect.connect("tcp://"+str(ips[start])+":9000")
-
-        data.write(str("worker-%s" % (codes[start]))+"\n")
-
-        Connect.start(codes[start])
-
-        start += 1
-
-    data.close()
+        Connect.connect("tcp://"+line[2]+":9000")
+        Connect.start(str(line[1]).split("-")[1])
+        '''
+    conn.commit()
+    conn.close()
