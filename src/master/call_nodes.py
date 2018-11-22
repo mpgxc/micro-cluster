@@ -4,7 +4,6 @@ import sqlite3
 
 DATABASE = "./database.db"
 
-
 def connectNodes():
 
     conn = sqlite3.connect(DATABASE)
