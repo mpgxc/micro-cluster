@@ -184,11 +184,4 @@ def update():
 
 
 if __name__ == '__main__':
-
-    QUANTED = sys.argv[1]
-
-    sk = open("cache/quant.txt", "w")
-    sk.write(QUANTED)
-    sk.close()
-
     app.run(host='127.0.0.1', port=47258, debug=True)

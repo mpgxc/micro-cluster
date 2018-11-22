@@ -41,8 +41,6 @@ def index():
 
         make_words_save([pal1, pal2, pal3])  # Palavras bases para pesquisar
 
-        time.sleep(0.5)
-
         return redirect(url_for('update'))
 
     return render_template('index.html', campos=campos)
@@ -68,17 +66,13 @@ def update():
                 break
         except:
             pass
+
     fim = timeit.default_timer()
 
     result = fim - inicio
 
     pals = count_words()
-    print("----------------------------------------------------")
-    print("RESULT", result)
-    print("----------------------------------------------------")
-    print("PALS", pals)
-    print("----------------------------------------------------")
-    
+
     os.remove('data.txt')
     os.remove('words.txt')
 

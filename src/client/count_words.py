@@ -10,5 +10,3 @@ def count_words():
                 result.append(data)
 
     return result
-
-print(count_words)

@@ -40,7 +40,7 @@ class ServerTask(threading.Thread):
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
         # frontend.bind('tcp://192.168.0.3:5599')
-        frontend.bind('tcp://192.168.0.5:10500')
+        frontend.bind('tcp://192.168.0.5:9500')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
