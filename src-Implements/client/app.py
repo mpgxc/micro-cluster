@@ -69,7 +69,9 @@ def update():
     result = fim - inicio
 
     pals = count_words()
-
+    print("================================================")
+    print("| %s " % (pals))
+    print("================================================")
     os.remove('data.txt')
     os.remove('words.txt')
 

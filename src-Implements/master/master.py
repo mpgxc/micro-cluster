@@ -14,6 +14,7 @@ from sorting import sorting as make_order
 from sender import server_Envia
 from call_nodes import connectNodes
 from count_nodes import make_count
+from sender import server_Recebe
 
 
 def descompacta(text):
@@ -68,12 +69,16 @@ class ServerWorker(threading.Thread):
 
         while True:
 
+            print("Iniciando Server-Recebe Requests")
+            server_Recebe()  # Ativa o SocketMQ para receber requisições
+
             worker = self.context.socket(mySocket.DEALER)
             worker.connect('inproc://backend')
             tprint('Servidor TRABALAHNDO')
 
             # Faz uma chamada RPC, para conectar os nodes ao master
             quant_slave = make_count()
+
             print("++++++++++++++++++++++++++++++++")
             print("Nodes: ", quant_slave)
             print("++++++++++++++++++++++++++++++++")
@@ -156,6 +161,12 @@ class ServerWorker(threading.Thread):
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
+
+            try:
+                os.remove('cache/status.txt')
+            except:
+                pass
+
             os.remove('data.txt')
 
             print("Complete Task!")
@@ -168,6 +179,7 @@ def main():
     try:
         # --------------------
         os.remove('data.txt')
+        os.remove('cache/status.txt')
     except:
         pass
 

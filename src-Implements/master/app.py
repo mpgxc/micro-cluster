@@ -92,14 +92,19 @@ def task_connection():
 
 def makeDoubleTask():
 
-    pPal = multiprocessing.Process(target=server_Recebe)
+    saida = open("cache/status.txt", "w")
+    saida.write("started")
+    saida.close()
+
+    #pPal = multiprocessing.Process(target=server_Recebe)
     pCor = multiprocessing.Process(target=main)
 
     pCor.start()
-    pPal.start()
+   #pPal.start()
 
     pCor.join()
-    pPal.join()
+    #pPal.join()
+
 # ------------------
 
 # Paginas
@@ -107,11 +112,10 @@ def makeDoubleTask():
 
 @app.route('/')
 def index():
-
-    task_connection()  # Aguarda requisição do Cliente
-
-    connectNodes()
-
+    try:
+        open("cache/status.txt","r")
+    except:
+        task_connection()
     qtd = make_count()
 
     return render_template('index.html', qtd=qtd)

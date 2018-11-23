@@ -17,16 +17,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 <script>
-	/*
-	$(document).ready(function () { /// Wait till page is loaded
-		setInterval(timingLoad, 10000);
-		function timingLoad() {
-			$('#main').load("{{ url_for('update') }} #main", function () {
-				/// can add another function here
-			});
-		}
-	});
-	*/
+
 	function spiner() { /// Wait till page is loaded
 
 		$('#main').load("{{ url_for('spiner') }} #main", function () {
@@ -67,7 +58,6 @@
 			<h6 class="border-bottom border-gray pb-2 mb-0">Administração</h6>
 			<br>
 
-			<a class="btn btn-primary btn-sm" href="#" role="button">Iniciar</a>
 			<a class="btn btn-primary btn-sm" href="/add" role="button">Cadastar</a>
 			<a class="btn btn btn-danger btn-sm" href="/rem" role="button">Remover</a>
 
@@ -92,9 +82,9 @@
 
 			<small class=" d-block text-right mt-3">
 				{% if qtd > 0 %}
-					<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
+				<button id="detailed" onclick="spiner()" type="button" class="btn btn-primary btn-sm">Atualizar</button>
 				{% else %}
-					<a onclick="spiner()" class="btn btn-primary btn-sm" href="/" role="button">Atualizar</a>
+				<a onclick="spiner()" class="btn btn-primary btn-sm" href="/" role="button">Atualizar</a>
 				{% endif %}
 			</small>
 		</div>
