@@ -3,11 +3,10 @@ from sender import server_Envia, server_Recebe
 from forms import Entrada
 from read_load import load
 import requests
-import time
-import timeit
 import multiprocessing
 import threading
 import os
+import time
 from words import make_words_save
 from count_words import count_words
 
@@ -51,8 +50,6 @@ def index():
 def update():
     # tem como melhorar, mas não vai ser agora....
 
-    inicio = timeit.default_timer()
-
     while True:
         time.sleep(1)
         try:
@@ -60,22 +57,21 @@ def update():
                 pass
             else:
                 data_set = load('data.txt')
+                tempo = open('time.txt').readline()
                 break
         except:
             pass
-
-    fim = timeit.default_timer()
-
-    result = fim - inicio
 
     pals = count_words()
     print("================================================")
     print("| %s " % (pals))
     print("================================================")
+
     os.remove('data.txt')
     os.remove('words.txt')
+    os.remove('time.txt')
 
-    return render_template('update.html', data=data_set, pals=pals, tempo=str(result))
+    return render_template('update.html', data=data_set, pals=pals, tempo=tempo)
 
 
 @app.route('/spiner')

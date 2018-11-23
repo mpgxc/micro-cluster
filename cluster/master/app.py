@@ -12,7 +12,7 @@ import sys
 import sqlite3
 from call_nodes import connectNodes
 import os
-from count_nodes import make_count
+from count_nodes import make_count, make_count_relats
 from master import main
 from forms import Entrada
 import os
@@ -33,6 +33,24 @@ if not os.path.exists(DATABASE):
 
     cur.execute(
         "CREATE TABLE users (id integer primary key autoincrement, name TEXT not null, ip TEXT not null, ram TEXT not null, cores TEXT not null);"
+    )
+
+    cur.execute(
+        "CREATE TABLE relats (id integer primary key autoincrement, sec TEXT not null, pal1 TEXT not null, pal2 TEXT not null, pal3 TEXT not null);"
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def insert_relats(sec, pal1, pal2, pal3):
+
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+
+    cur.execute(
+        "INSERT INTO relats (sec, pal1, pal2, pal3) VALUES('"+str(sec)+"', '" +
+        str(pal1)+"', '"+str(pal2)+"', '"+str(pal3)+"');"
     )
 
     conn.commit()
@@ -102,8 +120,6 @@ def makeDoubleTask():
     pCor.join()
 
 
-
-
 # Paginas
 
 
@@ -166,6 +182,19 @@ def update():
     time.sleep(1)
 
     return render_template('worker.html',  nodes=res)  # map_network()
+
+
+@app.route('/relatorio')
+def relatorio():
+
+    cur = get_dbase().cursor()
+    res = cur.execute("select * from relats")
+
+    qtd = make_count_relats()
+
+    time.sleep(1)
+
+    return render_template('relatorio.html', nodes=res, qtd = qtd)
 
 
 if __name__ == '__main__':

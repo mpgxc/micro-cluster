@@ -4,6 +4,8 @@ import threading
 import json
 import time
 import base64
+import time
+import timeit
 from readdata import load
 import zlib
 from txt_to_json import make as data_json
@@ -68,6 +70,8 @@ class ServerWorker(threading.Thread):
     def run(self):
 
         while True:
+
+            inicio = timeit.default_timer()
 
             print("Iniciando Server-Recebe Requests")
             server_Recebe()  # Ativa o SocketMQ para receber requisições
@@ -155,19 +159,26 @@ class ServerWorker(threading.Thread):
             make_order('cache/mapper_output.txt')
             # executa o final reducing
             reducer('cache/mapper_output.txt')
+            # CountTempo
+
+            fim = timeit.default_timer()
+
+            result = fim - inicio
+
             # Envia pro cliente
             server_Envia(
-                "".join([line for line in open('cache/reducer_output.txt')]))
+                "".join([line for line in open('cache/reducer_output.txt')]), str(result)
+            )
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
+            os.remove('data.txt')
 
             try:
                 os.remove('cache/status.txt')
             except:
                 pass
-
-            os.remove('data.txt')
+            
 
             print("Complete Task!")
 

@@ -5,29 +5,25 @@ import random
 import sys
 import time
 
-SERVER_CLIENT = 4444
-SERVER_MASTER = 3333
-
-
-def server_Envia(file, times):
-
-    context = zmq.Context()
-    socket = context.socket(zmq.PAIR)
-    socket.connect("tcp://127.0.0.1:%s" % (SERVER_CLIENT))
-
-    socket.send_string(times)
-    socket.send_string(file)
+SERVER_CLIENT = 3333
 
 
 def server_Recebe():
 
     context = zmq.Context()
     socket = context.socket(zmq.PAIR)
-    socket.bind("tcp://127.0.0.1:%s" % (SERVER_MASTER))
+    socket.bind("tcp://127.0.0.1:%s" % (SERVER_CLIENT))
 
+    
+    sec = socket.recv_string()
     msg = socket.recv()
+
+    print("Tempo:", sec)
     print("Recebido:", msg.decode("utf-8"))
 
     Saida = open("data.txt", "w")
     Saida.write(str(msg.decode("utf-8")))
     Saida.close()
+
+
+server_Recebe()
