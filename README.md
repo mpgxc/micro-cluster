@@ -68,7 +68,7 @@ Um contador de palavras pode ser útil para quem precisa escrever um texto que t
 Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, levando em consideração as três palavras dadas como entrada para que sejam buscadas, retornando o seu respectivo número de aparições no texto.
 
 
-### Tempos de Execução
+### Tempos de Execução #### Teste Simples.
 #### 1 - Node: 4.00460786199983 sec
 #### 2 - Node: 2.0028634170012083 sec
 
