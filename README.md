@@ -87,8 +87,6 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 ![academico](gui/6.png)
 
 
-
-##                                      É feio copiar os modelos sem referênciar!
 ```LateX
 @misc{mpgxc,
  title   ={A micro cluster for counting words based on the mapreduce model},
