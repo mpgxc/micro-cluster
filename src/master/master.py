@@ -74,6 +74,7 @@ class ServerWorker(threading.Thread):
 
             # Faz uma chamada RPC, para conectar os nodes ao master
             quant_slave = make_count()
+            
             connectNodes()
 
             count = 0
