@@ -16,6 +16,7 @@ from count_nodes import make_count
 from master import main
 from forms import Entrada
 import os
+from sender import server_Recebe
 
 DATABASE = "./database.db"
 
@@ -84,26 +85,6 @@ def close_connection(exception):
 # ---------------------------------------------------
 
 
-def make_connection():
-
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-    channel = connection.channel()
-    channel.queue_declare(queue='master')
-
-    def callback(ch, method, properties, body):
-
-        print(" [x] Recebido Master %r" % body)
-        Saida = open('data.txt', 'w')
-        Saida.write(str(body.decode()))
-        Saida.close()
-
-    channel.basic_consume(callback, queue='master', no_ack=True)
-    channel.start_consuming()
-
-    channel.stop_consuming()
-    connection.close()
-
-
 def task_connection():
     tasK = threading.Thread(name="t1", target=makeDoubleTask)
     tasK.start()
@@ -111,7 +92,7 @@ def task_connection():
 
 def makeDoubleTask():
 
-    pPal = multiprocessing.Process(target=make_connection)
+    pPal = multiprocessing.Process(target=server_Recebe)
     pCor = multiprocessing.Process(target=main)
 
     pCor.start()
@@ -119,7 +100,7 @@ def makeDoubleTask():
 
     pCor.join()
     pPal.join()
-#------------------
+# ------------------
 
 # Paginas
 

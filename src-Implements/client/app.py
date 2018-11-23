@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
-from sender import send, receive
+from sender import server_Envia, server_Recebe
 from forms import Entrada
 from read_load import load
 import requests
 import time
+import timeit
 import multiprocessing
 import threading
 import os
@@ -15,7 +16,7 @@ app = Flask(__name__)
 
 def task_connection():
 
-    tasK = threading.Thread(name="t1", target=receive)
+    tasK = threading.Thread(name="t1", target=server_Recebe)
     tasK.start()
 
 
@@ -34,7 +35,7 @@ def index():
         pass
     else:
 
-        send(texto)
+        server_Envia(texto)
         task_connection()
 
         time.sleep(0.5)
@@ -44,10 +45,6 @@ def index():
         return redirect(url_for('update'))
 
     return render_template('index.html', campos=campos)
-
-
-import time
-import timeit
 
 
 @app.route('/update')

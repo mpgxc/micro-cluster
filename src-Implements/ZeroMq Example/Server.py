@@ -18,4 +18,3 @@ def server_Recebe():
     Saida.close()
 
 
-server_Recebe()

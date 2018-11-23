@@ -1,32 +1,31 @@
 import pika
-from read_load import load
 import os
+import zmq
+import random
+import sys
+import time
+
+SERVER_CLIENT = 4444
+SERVER_MASTER = 3333
 
 
-def send(file):
+def server_Envia(file):
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-    channel = connection.channel()
-    channel.queue_declare(queue='master')
-    channel.basic_publish(exchange='', routing_key='master', body=file)
-    connection.close()
+    context = zmq.Context()
+    socket = context.socket(zmq.PAIR)
+    socket.connect("tcp://127.0.0.1:%s" % (SERVER_MASTER))
+    socket.send_string(file)
 
 
-def receive():
+def server_Recebe():
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-    channel = connection.channel()
-    channel.queue_declare(queue='cliente')
+    context = zmq.Context()
+    socket = context.socket(zmq.PAIR)
+    socket.bind("tcp://127.0.0.1:%s" % (SERVER_CLIENT))
 
-    def callback(ch, method, properties, body):
-        
-        print(" [x] Recebido Cliente %r" % body)
-        Saida = open('data.txt', 'w')
-        Saida.write(str(body.decode()))
-        Saida.close()
+    msg = socket.recv()
+    print("Recebido:", msg.decode("utf-8"))
 
-    channel.basic_consume(callback, queue='cliente', no_ack=True)
-    channel.start_consuming()
-
-    channel.stop_consuming()
-    connection.close()
+    Saida = open("data.txt", "w")
+    Saida.write(str(msg.decode("utf-8")))
+    Saida.close()

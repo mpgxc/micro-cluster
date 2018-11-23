@@ -11,7 +11,7 @@ from jack_module import make_jack
 import os
 from final_reducer import reducer
 from sorting import sorting as make_order
-from sender import send
+from sender import server_Envia
 from call_nodes import connectNodes
 from count_nodes import make_count
 
@@ -147,7 +147,7 @@ class ServerWorker(threading.Thread):
             # executa o final reducing
             reducer('cache/mapper_output.txt')
             # Envia pro cliente
-            send("".join([line for line in open('cache/reducer_output.txt')]))
+            server_Envia("".join([line for line in open('cache/reducer_output.txt')]))
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
