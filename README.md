@@ -89,11 +89,12 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 
 
 ##                                      É feio copiar os modelos sem referênciar!
-```C
+```LateX
 @misc{mpgxc,
  title   ={A micro cluster for counting words based on the mapreduce model},
  url     ={https://github.com/mpgxc/micro_cluster},
  organization={AbnTeX},
  urlaccessdate={21 nov. 2018}
 }
+Use \cite{mpgxc}
 ```
