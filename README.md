@@ -89,3 +89,11 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 
 
 ##                                      É feio copiar os modelos sem referênciar!
+```Latex
+@misc{birds1998,
+ title   ={Escreva seu trabalho de conclusão de curso com as normas da ABNT em Markdown},
+ url     ={https://github.com/abntex/limarka},
+ organization={AbnTeX},
+ urlaccessdate={27 nov. 2016}
+}
+```
