@@ -71,3 +71,6 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 ### Tempos de Execução
 #### 1 - Node: 4.00460786199983 sec
 #### 2 - Node: 2.0028634170012083 sec
+
+
+##                                      É feio copiar os modelos sem referênciar!
