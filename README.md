@@ -72,6 +72,11 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 - 1 - Node: 4.00460786199983 sec
 - 2 - Node: 2.0028634170012083 sec
 
-## Tela Master:
-![academico](img/master.png)
+## Telas:
+![academico](gui/1.png)
+![academico](gui/2.png)
+![academico](gui/3.png)
+![academico](gui/4.png)
+![academico](gui/5.png)
+![academico](gui/6.png)
 ##                                      É feio copiar os modelos sem referênciar!
