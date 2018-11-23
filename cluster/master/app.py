@@ -96,16 +96,13 @@ def makeDoubleTask():
     saida.write("started")
     saida.close()
 
-    #pPal = multiprocessing.Process(target=server_Recebe)
     pCor = multiprocessing.Process(target=main)
 
     pCor.start()
-   # pPal.start()
-
     pCor.join()
-    # pPal.join()
 
-# ------------------
+
+
 
 # Paginas
 
@@ -122,6 +119,7 @@ def index():
         open("cache/status.txt", "r")
     except:
         task_connection()
+
     qtd = make_count()
 
     return render_template('index.html', qtd=qtd)
