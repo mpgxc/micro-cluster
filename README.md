@@ -86,6 +86,8 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 ##### Tela Cliente/Resultados > Retorno das ocorrências
 ![academico](gui/6.png)
 
+##Acknowledgements:
+![academico](img/mestres.png)
 
 ```LateX
 @misc{mpgxc,
