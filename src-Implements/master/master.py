@@ -74,8 +74,11 @@ class ServerWorker(threading.Thread):
 
             # Faz uma chamada RPC, para conectar os nodes ao master
             quant_slave = make_count()
+            print("++++++++++++++++++++++++++++++++")
+            print("Nodes: ", quant_slave)
+            print("++++++++++++++++++++++++++++++++")
 
-           # connectNodes()
+            connectNodes()
 
             count = 0
 
@@ -98,6 +101,7 @@ class ServerWorker(threading.Thread):
 
             while True:
                 time.sleep(0.5)
+                print("< Esperando Receber DADOS! >")
                 try:
                     myData = open("data.txt")
                     break
@@ -147,7 +151,8 @@ class ServerWorker(threading.Thread):
             # executa o final reducing
             reducer('cache/mapper_output.txt')
             # Envia pro cliente
-            server_Envia("".join([line for line in open('cache/reducer_output.txt')]))
+            server_Envia(
+                "".join([line for line in open('cache/reducer_output.txt')]))
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
