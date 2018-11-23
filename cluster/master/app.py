@@ -100,10 +100,10 @@ def makeDoubleTask():
     pCor = multiprocessing.Process(target=main)
 
     pCor.start()
-   #pPal.start()
+   # pPal.start()
 
     pCor.join()
-    #pPal.join()
+    # pPal.join()
 
 # ------------------
 
@@ -112,8 +112,14 @@ def makeDoubleTask():
 
 @app.route('/')
 def index():
+
     try:
-        open("cache/status.txt","r")
+        os.remove('cache/status.txt')
+    except:
+        pass
+
+    try:
+        open("cache/status.txt", "r")
     except:
         task_connection()
     qtd = make_count()

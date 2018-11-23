@@ -179,7 +179,6 @@ def main():
     try:
         # --------------------
         os.remove('data.txt')
-        os.remove('cache/status.txt')
     except:
         pass
 
