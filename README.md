@@ -73,16 +73,19 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 - 2 - Node: 2.0028634170012083 sec
 
 ## Telas:
-- Tela Master - Sem cadastro.
-	![academico](gui/1.png)
-- Tela Master > Cadastrar Nodes/Slaves.
-	![academico](gui/2.png)
-- Tela Master > Remover Nodes/Slaves.
-	![academico](gui/3.png)
-- Tela Master - Com cadastro.
-	![academico](gui/4.png)
-- Tela Cliente > Efetuando Query.
-	![academico](gui/5.png)
-- Tela Cliente/Resultados > Retorno das ocorrências
-	![academico](gui/6.png)
+##### Tela Master - Sem cadastro.
+![academico](gui/1.png)
+##### Tela Master > Cadastrar Nodes/Slaves.
+![academico](gui/2.png)
+##### Tela Master > Remover Nodes/Slaves.
+![academico](gui/3.png)
+##### Tela Master - Com cadastro.
+![academico](gui/4.png)
+##### Tela Cliente > Efetuando Query.
+![academico](gui/5.png)
+##### Tela Cliente/Resultados > Retorno das ocorrências
+![academico](gui/6.png)
+
+
+
 ##                                      É feio copiar os modelos sem referênciar!
