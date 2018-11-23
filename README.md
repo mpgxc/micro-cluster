@@ -94,5 +94,7 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
  organization={AbnTeX},
  urlaccessdate={21 nov. 2018}
 }
+```
+```LateX
 Use \cite{mpgxc}
 ```
