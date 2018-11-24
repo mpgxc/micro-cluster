@@ -18,7 +18,7 @@
 </head>
 <script>
 
-    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.load('current', { 'packages': ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawChart);
 
 
@@ -47,37 +47,71 @@
     var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
     barchart.draw(data, barchart_options);
     };
-    google.charts.setOnLoadCallback(drawChart2);
-    function drawChart2() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'Asia'],
-            ['2012', 900],
-            ['2013', 1000],
-            ['2014', 1170],
-            ['2015', 1250],
-            ['2016', 1530],
-            ['2013', 2000],
-            ['2014', 1170],
-            ['2015', 1250],
-            ['2016', 1530],
-            ['2013', 1000],
-            ['2014', 1170],
-            ['2015', 1250],
-            ['2016', 1530]
+
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = new google.visualization.arrayToDataTable([
+            ['', 'Quantidade'],
+            ['Copwrper', 855.94],
+            ['rretew', 2565.94],
+            ['Silver', 1890.49],
+            ['Gorwld', 1999.30],
+            ['ewterwt', 1088.49],
+            ['Silertvbver', 1240.49],
+            ['sdfsfa', 845.94],
+            ['Cpdasfsdper', 866.94],
+            ['Silvweer', 1099.49],
+            ['Cofdpper', 867.94],
+            ['Cowepper', 855.94],
+            ['Codspper', 2565.94],
+            ['Sietlver', 1890.49],
+            ['Gerold', 1999.30],
+            ['Si09lver', 1088.49],
+            ['Copçiçper', 845.94],
+            ['Cop113per', 866.94],
+            ['Si123lver', 1099.49],
+            ['Coqwepper', 867.94],
+            ['Copqeper', 855.94],
+            ['Copqweper', 2565.94],
+            ['Silver', 1890.49],
+            ['Goreld', 1999.30],
+            ['Siwlver', 1088.49],
+            ['Coppetetr', 845.94],
+            ['Copeerper', 866.94],
+            ['Silqver', 1099.49],
+            ['Coqpper', 867.94],
+            ['Copre3per', 855.94]
+
+
         ]);
 
-        var options = { title: 'Population (in millions)' };
+        var options = {
+            height: 300,
+            bar: { groupWidth: "85%" },
+            legend: { position: "none" },
+            title: 'Ocorrências x Palavras',
+            hAxis: {
+                title: 'Palavras'
+            },
+            vAxis: {
+                title: 'Ocorrências'
+            }
+        };
 
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('container'));
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('container'));
+
         chart.draw(data, options);
     }
+
+
     google.charts.setOnLoadCallback(drawChart);
 
     $(window).resize(function () {
         drawChart();
-        drawChart2();
+        drawBasic();
     });
 
     $(document).ready(function () {
@@ -134,14 +168,14 @@
         </div>
 
         <div class="my-3 p-3 bg-white rounded shadow-sm ">
-            <div style="margin: 15px" class="card .col-sm-5 .col-md-6 box-shadow">
-                <div id="container"></div>
+            <div id="container" style="margin: 15px" class="card .col-sm-5 .col-md-6 box-shadow">
+         
             </div>
 
         </div>
         <div style=" text-align: center;" class="my-3 p-3 bg-white rounded shadow-sm">
             <h2>Tempo de execução</h2>
-            <h3> <code>{{ tempo }} </code> Segundos</h3> 
+            <h3> <code>{{ tempo[0] }} </code> {{ tempo[1] }}</h3>
         </div>
         <div id="mains"></div>
 

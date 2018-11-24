@@ -17,6 +17,7 @@ from sender import server_Envia
 from call_nodes import connectNodes
 from count_nodes import make_count
 from sender import server_Recebe
+from insert_values import insert_relats
 
 
 def descompacta(text):
@@ -71,8 +72,6 @@ class ServerWorker(threading.Thread):
 
         while True:
 
-            inicio = timeit.default_timer()
-
             print("Iniciando Server-Recebe Requests")
             server_Recebe()  # Ativa o SocketMQ para receber requisições
 
@@ -118,6 +117,7 @@ class ServerWorker(threading.Thread):
                     pass
 
             print("Leu Dados!")
+            inicio = timeit.default_timer()
 
             # recebendo data e convertendo em JSOn
             data = data_json(
@@ -163,12 +163,24 @@ class ServerWorker(threading.Thread):
 
             fim = timeit.default_timer()
 
-            result = fim - inicio
+            Tempo = fim - inicio
 
+            if (float(Tempo)) >= 60:
+                result = str(float(Tempo)/60) + "-" + "Minutos"
+
+            elif str(Tempo)[len(str(Tempo)) - 3] == '-':
+                result = str(Tempo) + "-" + "Milisegundos"
+
+            else:
+                result = str(Tempo) + "-" + "Segundos"
             # Envia pro cliente
             server_Envia(
-                "".join([line for line in open('cache/reducer_output.txt')]), str(result)
+                "".join([line for line in open(
+                    'cache/reducer_output.txt')]), str(result)
             )
+            # insere no banco de dados
+            insert_relats(str(result), "TESTE", "TESTE", "TESTE")
+
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
@@ -178,7 +190,6 @@ class ServerWorker(threading.Thread):
                 os.remove('cache/status.txt')
             except:
                 pass
-            
 
             print("Complete Task!")
 
@@ -186,12 +197,6 @@ class ServerWorker(threading.Thread):
 
 
 def main():
-
-    try:
-        # --------------------
-        os.remove('data.txt')
-    except:
-        pass
 
     server = ServerTask()
     server.start()

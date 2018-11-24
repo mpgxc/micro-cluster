@@ -43,20 +43,6 @@ if not os.path.exists(DATABASE):
     conn.close()
 
 
-def insert_relats(sec, pal1, pal2, pal3):
-
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-
-    cur.execute(
-        "INSERT INTO relats (sec, pal1, pal2, pal3) VALUES('"+str(sec)+"', '" +
-        str(pal1)+"', '"+str(pal2)+"', '"+str(pal3)+"');"
-    )
-
-    conn.commit()
-    conn.close()
-
-
 def insert_values(name, ip, ram, cores):
 
     conn = sqlite3.connect(DATABASE)
@@ -125,12 +111,14 @@ def makeDoubleTask():
 
 @app.route('/')
 def index():
-
     try:
         os.remove('cache/status.txt')
     except:
         pass
-
+    try:
+        os.remove('data.txt')
+    except:
+        pass
     try:
         open("cache/status.txt", "r")
     except:
@@ -184,17 +172,21 @@ def update():
     return render_template('worker.html',  nodes=res)  # map_network()
 
 
-@app.route('/relatorio')
-def relatorio():
+@app.route('/relats')
+def relats():
 
     cur = get_dbase().cursor()
     res = cur.execute("select * from relats")
 
-    qtd = make_count_relats()
-
     time.sleep(1)
 
-    return render_template('relatorio.html', nodes=res, qtd = qtd)
+    return render_template('relats.html', nodes=res)
+
+
+@app.route('/relatorio')
+def relatorio():
+    qtd = make_count_relats()
+    return render_template('relatorio.html', qtd=qtd)
 
 
 if __name__ == '__main__':

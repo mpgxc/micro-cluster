@@ -22,6 +22,11 @@ def task_connection():
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
+    try:
+        os.remove('words.txt')
+    except:
+        pass
+
     campos = Entrada(request.form)
 
     pal1 = str(campos.Palavras1.data)
@@ -63,6 +68,7 @@ def update():
             pass
 
     pals = count_words()
+    tempo = tempo.split("-")
     print("================================================")
     print("| %s " % (pals))
     print("================================================")
