@@ -1,4 +1,3 @@
-import pika
 import os
 import zmq
 import random
@@ -26,9 +25,11 @@ def server_Recebe():
     sec = socket.recv_string()
     msg = socket.recv()
 
+    print("===================================================")
     print("Tempo: ", sec)
     print("Recebido: ", msg.decode("utf-8"))
-
+    print("===================================================")
+    
     Saida = open("time.txt", "w")
     Saida.write(str(sec))
     Saida.close()

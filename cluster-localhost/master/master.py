@@ -71,7 +71,7 @@ class ServerWorker(threading.Thread):
 
         while True:
 
-            inicio = timeit.default_timer()
+            inicio = time.time()
 
             print("Iniciando Server-Recebe Requests")
             server_Recebe()  # Ativa o SocketMQ para receber requisições
@@ -161,24 +161,28 @@ class ServerWorker(threading.Thread):
             reducer('cache/mapper_output.txt')
             # CountTempo
 
-            fim = timeit.default_timer()
+            fim = time.time()
 
             result = fim - inicio
 
             # Envia pro cliente
             server_Envia(
-                "".join([line for line in open('cache/reducer_output.txt')]), str(result)
+                "".join(
+                    [line for line in open(
+                    'cache/retducer_output.txt')
+                    ]), str(result)
             )
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
             os.remove('data.txt')
 
+            fim, result, inicio = 0, 0, 0
+
             try:
                 os.remove('cache/status.txt')
             except:
                 pass
-            
 
             print("Complete Task!")
 
