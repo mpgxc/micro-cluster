@@ -113,9 +113,6 @@ def makeDoubleTask():
 def index():
     try:
         os.remove('cache/status.txt')
-    except:
-        pass
-    try:
         os.remove('data.txt')
     except:
         pass
