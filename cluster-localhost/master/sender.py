@@ -29,7 +29,7 @@ def server_Recebe():
     msg = socket.recv()
 
     Saida = open("query_words.txt", "w")
-    Saida.write(str(pal.decode("utf-8")))
+    Saida.write(str(pal))
     Saida.close()
 
     Saida = open("data.txt", "w")

@@ -14,7 +14,7 @@ def server_Envia(file, palavras):
     context = zmq.Context()
     socket = context.socket(zmq.PAIR)
     socket.connect("tcp://127.0.0.1:%s" % (SERVER_MASTER))
-    socket.send_string(palavras)
+    socket.send_string(str(palavras))
     socket.send_string(file)
 
 
@@ -24,7 +24,7 @@ def server_Recebe():
     socket = context.socket(zmq.PAIR)
     socket.bind("tcp://127.0.0.1:%s" % (SERVER_CLIENT))
 
-    sec = socket.recv_string()
+    sec = socket.recv()
     msg = socket.recv()
 
     Saida = open("time.txt", "w")
