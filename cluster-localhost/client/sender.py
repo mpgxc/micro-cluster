@@ -9,11 +9,12 @@ SERVER_CLIENT = 4444
 SERVER_MASTER = 3333
 
 
-def server_Envia(file):
+def server_Envia(file, palavras):
 
     context = zmq.Context()
     socket = context.socket(zmq.PAIR)
     socket.connect("tcp://127.0.0.1:%s" % (SERVER_MASTER))
+    socket.send_string(palavras)
     socket.send_string(file)
 
 
@@ -25,9 +26,6 @@ def server_Recebe():
 
     sec = socket.recv_string()
     msg = socket.recv()
-
-    print("Tempo: ", sec)
-    print("Recebido: ", msg.decode("utf-8"))
 
     Saida = open("time.txt", "w")
     Saida.write(str(sec))

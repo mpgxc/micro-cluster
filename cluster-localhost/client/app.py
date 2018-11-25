@@ -34,12 +34,13 @@ def index():
     pal3 = str(campos.Palavras3.data)
 
     texto = str(campos.Texto.data)
+    palavs = [pal1, pal2, pal3]
 
     if pal1 == '' or pal2 == '' or pal3 == '' or texto == '':
         pass
     else:
 
-        server_Envia(texto)
+        server_Envia(texto, palavs)
         task_connection()
 
         time.sleep(0.5)
