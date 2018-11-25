@@ -183,7 +183,9 @@ class ServerWorker(threading.Thread):
             Pals = open('query_words.txt','r').readlines()
             Pals = str(Pals)
             print(Pals)
-            #insert_relats(str(result), Pals[0], Pals[1], Pals[2])
+            print(Pals[0], Pals[1], Pals[2])
+            
+            insert_relats(str(result), Pals[0], Pals[1], Pals[2])
 
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
