@@ -14,7 +14,7 @@ def server_Envia(file, palavras):
     context = zmq.Context()
     socket = context.socket(zmq.PAIR)
     socket.connect("tcp://127.0.0.1:%s" % (SERVER_MASTER))
-    socket.send_string(str(palavras))
+    socket.send_string(str(palavras).replace("[","").replace("]","").replace("'",""))
     socket.send_string(file)
 
 

@@ -179,7 +179,11 @@ class ServerWorker(threading.Thread):
                     'cache/reducer_output.txt')]), str(result)
             )
             # insere no banco de dados
-            insert_relats(str(result), "TESTE", "TESTE", "TESTE")
+
+            Pals = open('query_words.txt','r').readlines()
+            Pals = str(Pals)
+            print(Pals)
+            #insert_relats(str(result), Pals[0], Pals[1], Pals[2])
 
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
