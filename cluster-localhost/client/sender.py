@@ -28,7 +28,7 @@ def server_Recebe():
     msg = socket.recv()
 
     Saida = open("time.txt", "w")
-    Saida.write(str(sec))
+    Saida.write(str(sec.decode('utf-8')))
     Saida.close()
 
     Saida = open("data.txt", "w")
