@@ -21,7 +21,10 @@ def task_connection():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
+    try:
+        os.remove('words.txt')
+    except:
+        pass
     try:
         os.remove('words.txt')
     except:
@@ -76,13 +79,11 @@ def update():
     tempo = tempo.split("-")
     all_pall = all_count()
 
-
     print("================================================")
     print(data_set)
     print("================================================")
     print(all_pall)
     print("================================================")
-
 
     os.remove('data.txt')
     os.remove('words.txt')

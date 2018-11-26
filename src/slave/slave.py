@@ -79,8 +79,11 @@ class ClientTask(threading.Thread):
         os.remove('cache/mapper_output.txt')
         os.remove('cache/reducer_output.txt')
 
+
+
         socket.close()
         context.term()
+
 
 
 class HelloRPC(object):
@@ -92,7 +95,7 @@ class HelloRPC(object):
 
 
 if __name__ == "__main__":
-    
+
     print("[ * ] - Servidor RPC - Slaver")
 
     Connect = zerorpc.Server(HelloRPC())

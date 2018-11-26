@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, g, redirect, url_for
 import requests
-from controlers.main import map_network
 import pika
 import subprocess
 from threading import Thread
@@ -24,8 +23,12 @@ DATABASE = "./database.db"
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'super-secret'
-
-
+'''
+try:
+    os.remove('database.db')
+except:
+    pass
+'''
 if not os.path.exists(DATABASE):
 
     conn = sqlite3.connect(DATABASE)
@@ -173,7 +176,7 @@ def update():
 
     cur = get_dbase().cursor()
     res = cur.execute("select * from users")
-    
+
     time.sleep(1)
 
     return render_template('worker.html',  nodes=res)  # map_network()
