@@ -107,7 +107,6 @@ class ServerWorker(threading.Thread):
                     count += 1
 
             while True:
-                time.sleep(0.1)
                 print("< Esperando Receber DADOS! >")
                 try:
                     myData = open("data.txt","r")
