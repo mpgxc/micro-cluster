@@ -130,7 +130,7 @@ def index():
         open("cache/status.txt", "r")
     except:
         task_connection()
-       
+
     qtd = make_count()
 
     return render_template('index.html', qtd=qtd)
@@ -173,7 +173,7 @@ def update():
 
     cur = get_dbase().cursor()
     res = cur.execute("select * from users")
-
+    
     time.sleep(1)
 
     return render_template('worker.html',  nodes=res)  # map_network()
