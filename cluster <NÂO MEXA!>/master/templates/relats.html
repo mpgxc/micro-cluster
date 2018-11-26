@@ -5,10 +5,10 @@
             <thead>
                 <tr>
                     <th scope="col">*</th>
-                    <th scope="col">Node</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Ram</th>
-                    <th scope="col">Cpu</th>
+                    <th scope="col">Tempo</th>
+                    <th scope="col">1ª Palavra</th>
+                    <th scope="col">2ª Palavra</th>
+                    <th scope="col">3ª Palavra</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,7 +16,7 @@
                 {% for line in nodes %}
                 <tr>
                     <th scope="row">
-                        <img width="25px" src="static/img/pc.png">
+                        <img width="25px" src="static/img/file.svg">
                     </th>
 
                     <td><code>{{ line[1] }}</code></td>
