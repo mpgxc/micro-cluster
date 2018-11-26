@@ -15,7 +15,7 @@ def connectNodes():
     for line in cursor:
 
         Connect = zerorpc.Client()
-        Connect.connect("tcp://"+line[2]+":54321")
+        Connect.connect("tcp://"+line[2]+":56789")
         Connect.start(str(line[1]).split("-")[1])
 
     conn.commit()

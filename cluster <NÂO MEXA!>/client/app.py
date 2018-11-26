@@ -8,7 +8,7 @@ import threading
 import os
 import time
 from words import make_words_save
-from count_words import count_words
+from count_words import count_words, all_count
 
 app = Flask(__name__)
 
@@ -24,6 +24,10 @@ def index():
 
     try:
         os.remove('words.txt')
+    except:
+        pass
+    try:
+        os.remove('data.txt')
     except:
         pass
 
@@ -70,15 +74,21 @@ def update():
 
     pals = count_words()
     tempo = tempo.split("-")
+    all_pall = all_count()
+
+
     print("================================================")
-    print("| %s " % (pals))
+    print(data_set)
     print("================================================")
+    print(all_pall)
+    print("================================================")
+
 
     os.remove('data.txt')
     os.remove('words.txt')
     os.remove('time.txt')
 
-    return render_template('update.html', data=data_set, pals=pals, tempo=tempo)
+    return render_template('update.html', data_set=data_set, pals=pals, tempo=tempo, all_pall=all_pall)
 
 
 @app.route('/spiner')

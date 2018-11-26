@@ -96,5 +96,5 @@ if __name__ == "__main__":
     print("[ * ] - Servidor RPC - Slaver")
 
     Connect = zerorpc.Server(HelloRPC())
-    Connect.bind("tcp://0.0.0.0:54321")
+    Connect.bind("tcp://0.0.0.0:56789")
     Connect.run()

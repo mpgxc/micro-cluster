@@ -111,9 +111,13 @@ def makeDoubleTask():
 
 @app.route('/')
 def index():
+
     try:
-        os.remove('cache/status.txt')
         os.remove('data.txt')
+    except:
+        pass
+    try:
+        os.remove('query_words.txt')
     except:
         pass
     try:

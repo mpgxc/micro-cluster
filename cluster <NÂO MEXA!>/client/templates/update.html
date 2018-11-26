@@ -34,14 +34,14 @@
 
 
     var piechart_options = {
-        title: 'Porcentagem das emoções',
+        title: 'Porcentagem',
         is3D: true
     };
     var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
     piechart.draw(data, piechart_options);
 
     var barchart_options = {
-        title: 'Quantidade de Tweets',
+        title: 'Quantidade dos pesquisados',
         legend: 'none',
     };
     var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
@@ -54,37 +54,9 @@
 
         var data = new google.visualization.arrayToDataTable([
             ['', 'Quantidade'],
-            ['Copwrper', 855.94],
-            ['rretew', 2565.94],
-            ['Silver', 1890.49],
-            ['Gorwld', 1999.30],
-            ['ewterwt', 1088.49],
-            ['Silertvbver', 1240.49],
-            ['sdfsfa', 845.94],
-            ['Cpdasfsdper', 866.94],
-            ['Silvweer', 1099.49],
-            ['Cofdpper', 867.94],
-            ['Cowepper', 855.94],
-            ['Codspper', 2565.94],
-            ['Sietlver', 1890.49],
-            ['Gerold', 1999.30],
-            ['Si09lver', 1088.49],
-            ['Copçiçper', 845.94],
-            ['Cop113per', 866.94],
-            ['Si123lver', 1099.49],
-            ['Coqwepper', 867.94],
-            ['Copqeper', 855.94],
-            ['Copqweper', 2565.94],
-            ['Silver', 1890.49],
-            ['Goreld', 1999.30],
-            ['Siwlver', 1088.49],
-            ['Coppetetr', 845.94],
-            ['Copeerper', 866.94],
-            ['Silqver', 1099.49],
-            ['Coqpper', 867.94],
-            ['Copre3per', 855.94]
-
-
+            {% for line in all_pall %}
+                ['{{ line[0] }}', {{ line[1] }}],
+            {% endfor %}
         ]);
 
         var options = {
@@ -169,7 +141,7 @@
 
         <div class="my-3 p-3 bg-white rounded shadow-sm ">
             <div id="container" style="margin: 15px" class="card .col-sm-5 .col-md-6 box-shadow">
-         
+
             </div>
 
         </div>

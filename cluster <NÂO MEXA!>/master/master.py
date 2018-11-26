@@ -44,7 +44,7 @@ class ServerTask(threading.Thread):
         context = mySocket.Context()
         frontend = context.socket(mySocket.ROUTER)
         # frontend.bind('tcp://192.168.0.3:5599')
-        frontend.bind('tcp://192.168.0.105:12345')
+        frontend.bind('tcp://*:12345')
 
         backend = context.socket(mySocket.DEALER)
         backend.bind('inproc://backend')
@@ -79,13 +79,12 @@ class ServerWorker(threading.Thread):
             worker.connect('inproc://backend')
             tprint('Servidor TRABALAHNDO')
 
-            # Faz uma chamada RPC, para conectar os nodes ao master
             quant_slave = make_count()
 
             print("++++++++++++++++++++++++++++++++")
             print("Nodes: ", quant_slave)
             print("++++++++++++++++++++++++++++++++")
-
+            # Faz uma chamada RPC, para conectar os nodes ao master
             connectNodes()
 
             count = 0
@@ -180,22 +179,16 @@ class ServerWorker(threading.Thread):
             )
             # insere no banco de dados
 
-            Pals = open('query_words.txt','r').readlines()
-            Pals = str(Pals)
-            print(Pals)
-            print(Pals[0], Pals[1], Pals[2])
-            
+            Pals = open('query_words.txt', 'r').readline()
+            Pals = Pals.split(",")
+
             insert_relats(str(result), Pals[0], Pals[1], Pals[2])
 
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
             os.remove('data.txt')
-
-            try:
-                os.remove('cache/status.txt')
-            except:
-                pass
+            os.remove('query_words.txt')
 
             print("Complete Task!")
 
