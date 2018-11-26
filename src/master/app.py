@@ -90,6 +90,7 @@ def close_connection(exception):
 
 
 def task_connection():
+
     tasK = threading.Thread(name="t1", target=makeDoubleTask)
     tasK.start()
 
@@ -99,9 +100,10 @@ def makeDoubleTask():
     saida = open("cache/status.txt", "w")
     saida.write("started")
     saida.close()
-
-    pCor = multiprocessing.Process(target=main)
-
+    try:
+        pCor = multiprocessing.Process(target=main)
+    except:
+        print("Já conectado!")
     pCor.start()
     pCor.join()
 
@@ -111,16 +113,24 @@ def makeDoubleTask():
 
 @app.route('/')
 def index():
+
     try:
         os.remove('cache/status.txt')
+    except:
+        pass
+    try:
         os.remove('data.txt')
+    except:
+        pass
+    try:
+        os.remove('query_words.txt')
     except:
         pass
     try:
         open("cache/status.txt", "r")
     except:
         task_connection()
-
+       
     qtd = make_count()
 
     return render_template('index.html', qtd=qtd)

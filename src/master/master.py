@@ -79,14 +79,13 @@ class ServerWorker(threading.Thread):
             worker.connect('inproc://backend')
             tprint('Servidor TRABALAHNDO')
 
-            # Faz uma chamada RPC, para conectar os nodes ao master
-            quant_slave = make_count()
-
+            #quant_slave = make_count()
+            quant_slave = connectNodes()
             print("++++++++++++++++++++++++++++++++")
             print("Nodes: ", quant_slave)
             print("++++++++++++++++++++++++++++++++")
-
-            connectNodes()
+            # Faz uma chamada RPC, para conectar os nodes ao master
+            
 
             count = 0
 
@@ -125,7 +124,6 @@ class ServerWorker(threading.Thread):
             )
             # montando clusters do arquivo recebido com base na quantidade de nodes do cluster
             parts = make_jack(int(quant_slave), data)  # PRESTA antenção aqui
-
             count_ident = 0
 
             for line in parts:
@@ -180,22 +178,16 @@ class ServerWorker(threading.Thread):
             )
             # insere no banco de dados
 
-            Pals = open('query_words.txt','r').readlines()
-            Pals = str(Pals)
-            print(Pals)
-            print(Pals[0], Pals[1], Pals[2])
-            
+            Pals = open('query_words.txt', 'r').readline()
+            Pals = Pals.split(",")
+
             insert_relats(str(result), Pals[0], Pals[1], Pals[2])
 
             # Deletando file tmp
             os.remove('cache/mapper_output.txt')
             os.remove('cache/reducer_output.txt')
             os.remove('data.txt')
-
-            try:
-                os.remove('cache/status.txt')
-            except:
-                pass
+            os.remove('query_words.txt')
 
             print("Complete Task!")
 
