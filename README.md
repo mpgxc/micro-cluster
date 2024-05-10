@@ -27,7 +27,7 @@ Originalmente, Beowulf é o nome de um poema extenso e bastante antigo, cujo man
 Um cluster Beowulf se define, basicamente, pela ênfase nas seguintes características:
 
 - Entre os nós, deve haver pelo menos um que atue como mestre para exercer o controle dos demais. As máquinas mestres são chamadas de front-end; as demais, de back-end. Há a possibilidade de existir mais de um nó no front-end para que cada um realize tarefas específicas, como monitoramento, por exemplo;
-![academico](img/cluster.png)
+![academico](.github/img/cluster.png)
 - A comunicação entre os nós pode ser feita por redes do tipo Ethernet, mais comuns e mais baratas, como você já sabe;
 
 - Não é necessário o uso de hardware exigente, nem específico. A ideia é a de se aproveitar componentes que possam ser encontrados facilmente. Até mesmo PCs considerados obsoletos podem ser utilizados;
@@ -43,7 +43,7 @@ Arquitetura e estruturação do sistema - Cluster de processamento de texto em g
 #### Modelo padrão mapreduce
 ![academico](https://www.todaysoftmag.com/images/articles/tsm33/large/a11.png)
 #### Arquitetura mapreduce aplicado neste trabalho
-![academico](img/mapreduce.png)
+![academico](.github/img/mapreduce.png)
 ## Segurança
 		
 Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpgrafia em base64¹ e um método de compactação **hash_string** para garantir segurança e menores quantidades de dados trafegando na rede via sockets, possibilitando uma comunicação mais rápida de node à node.
@@ -55,10 +55,10 @@ Para gerenciar os arquivos entre cada node do cluster, será utilizado a criptpg
 
 Foi utilizado o conceito de criptografia ponto à ponto bastante conhecido graças aos mensageiros como o Whatsapp, onde a criptografia e descriptografia acontece em ambos os nós de uma conexão.
 #### Representação do sistema de criptografia utilizado no Cluster e modelo base.
-![academico](img/cript.png)
+![academico](.github/img/cript.png)
 
 ## Arquitetura geral do Sistema Cluster
-![academico](img/main.png)
+![academico](.github/img/main.png)
 
 ## Contador de palavras
 Como foi requisitado no trabalho, foi feita a implementação de algoritmo contador de palavras tendo como parametros de entrada, três palavras que serão buscadas a partir de um arquivo de texto.
@@ -74,20 +74,20 @@ Porém o enfoque desse trabalho é fazer a contagem unicamente das palavras, lev
 
 ## Telas:
 ##### Tela Master - Sem cadastro.
-![academico](gui/1.png)
+![academico](.github/img/1.png)
 ##### Tela Master > Cadastrar Nodes/Slaves.
-![academico](gui/2.png)
+![academico](.github/img/2.png)
 ##### Tela Master > Remover Nodes/Slaves.
-![academico](gui/3.png)
+![academico](.github/img/3.png)
 ##### Tela Master - Com cadastro.
-![academico](gui/4.png)
+![academico](.github/img/4.png)
 ##### Tela Cliente > Efetuando Query.
-![academico](gui/5.png)
+![academico](.github/img/5.png)
 ##### Tela Cliente/Resultados > Retorno das ocorrências
-![academico](gui/6.png)
+![academico](.github/img/6.png)
 
 ## Acknowledgements:
-![academico](img/mestres.png)
+![academico](.github/img/mestres.png)
 
 ```LateX
 @misc{mpgxc,
